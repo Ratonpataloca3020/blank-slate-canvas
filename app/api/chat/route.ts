@@ -30,7 +30,7 @@ export async function POST(request: Request) {
     return new Response("Messages are required", { status: 400 });
   }
 
-  const apiKey = process.env.LOVABLE_API_KEY;
+  const apiKey = await resolveApiKey();
   if (!apiKey) {
     return new Response("Missing LOVABLE_API_KEY", { status: 500 });
   }
