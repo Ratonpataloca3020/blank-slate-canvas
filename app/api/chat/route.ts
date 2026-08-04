@@ -47,7 +47,7 @@ export async function POST(request: Request) {
   const result = streamText({
     model: gateway("google/gemini-3.6-flash"),
     system: SYSTEM_PROMPT,
-    messages: convertToModelMessages(messages),
+    messages: await convertToModelMessages(messages),
   });
 
   return result.toUIMessageStreamResponse({ originalMessages: messages });
