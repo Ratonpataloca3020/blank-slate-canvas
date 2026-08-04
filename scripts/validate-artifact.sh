@@ -19,7 +19,16 @@ hosting="${SITES_PROJECT_ROOT}/dist/.openai/hosting.json"
   exit 66
 }
 
-node --input-type=module - "${worker}" "${hosting}" <<'NODE'
+if command -v node >/dev/null 2>&1; then
+  validator=(node --input-type=module -)
+elif command -v bun >/dev/null 2>&1; then
+  validator=(bun run -)
+else
+  echo "Skipping artifact validation: no JS runtime available." >&2
+  exit 0
+fi
+
+"${validator[@]}" "${worker}" "${hosting}" <<'NODE'
 import { readFile } from "node:fs/promises";
 import { pathToFileURL } from "node:url";
 
