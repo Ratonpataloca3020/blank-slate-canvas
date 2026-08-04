@@ -1,4 +1,4 @@
-type IconName = "administrative" | "contracts" | "civil" | "public" | "compliance" | "defense" | "arrow" | "whatsapp" | "phone" | "mail" | "pin" | "clock" | "shield" | "check" | "menu" | "close";
+type IconName = "administrative" | "contracts" | "civil" | "public" | "compliance" | "defense" | "splaft" | "arrow" | "whatsapp" | "phone" | "mail" | "pin" | "clock" | "shield" | "check" | "menu" | "close";
 
 export function Icon({ name, size = 24 }: { name: IconName; size?: number }) {
   const common = { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.65, strokeLinecap: "round" as const, strokeLinejoin: "round" as const, "aria-hidden": true };
@@ -9,6 +9,7 @@ export function Icon({ name, size = 24 }: { name: IconName; size?: number }) {
     public: <path d="M4 10h16M6 10v8M10 10v8M14 10v8M18 10v8M3 21h18M2 7l10-4 10 4H2Z" />,
     compliance: <><path d="M12 3 4 6v6c0 5 3 8 8 9 5-1 8-4 8-9V6l-8-3Z" /><path d="m8.5 12 2.2 2.2 4.8-5" /></>,
     defense: <><path d="M12 3 4 6v6c0 5 3 8 8 9 5-1 8-4 8-9V6l-8-3Z" /><path d="M9 9.5a3.5 3.5 0 1 1 6 2.5c-1.8 1.5-3 2.2-3 4M12 18h.01" /></>,
+    splaft: <><circle cx="11" cy="11" r="6.5" /><path d="m16 16 5 5" /><path d="M8.6 12.4 11 9.9l2.4 2.5M11 9.9V14" /></>,
     arrow: <path d="M5 12h14M14 6l6 6-6 6" />,
     whatsapp: <><path d="M20.5 11.7a8.5 8.5 0 0 1-12.6 7.4L3 20.5l1.4-4.7a8.5 8.5 0 1 1 16.1-4.1Z" /><path d="M8.2 8.1c.4-1 1.1-.8 1.5-.1l.7 1.6c.2.5-.1.8-.5 1.2.8 1.7 2 2.8 3.7 3.5.4-.4.7-.9 1.2-.7l1.7.8c.6.3.7 1 .2 1.5-1.1 1.2-2.7 1.1-4.5.3-2.4-1-4.8-3.3-5.6-5.6-.4-1-.3-1.9.2-2.5" /></>,
     phone: <path d="M5 4h4l2 5-2.5 1.5a15 15 0 0 0 5 5L15 13l5 2v4c0 1.1-.9 2-2 2C9.7 21 3 14.3 3 6c0-1.1.9-2 2-2Z" />,

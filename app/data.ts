@@ -7,7 +7,7 @@ export type Service = {
   description: string;
   matters: string[];
   approach: string[];
-  icon: "administrative" | "contracts" | "civil" | "public" | "compliance" | "defense";
+  icon: "administrative" | "contracts" | "civil" | "public" | "compliance" | "defense" | "splaft";
 };
 
 export const contact = {
@@ -86,6 +86,17 @@ export const services: Service[] = [
     approach: ["Confidencialidad desde el primer contacto", "Reconstrucción documentada de los hechos", "Defensa técnica y comunicación permanente"],
     icon: "defense",
   },
+  {
+    slug: "splaft",
+    eyebrow: "Prevención LA/FT",
+    title: "SPLAFT — Prevención de lavado de activos y financiamiento del terrorismo",
+    shortTitle: "SPLAFT",
+    summary: "Diseño, implementación y fortalecimiento de sistemas de prevención de lavado de activos y financiamiento del terrorismo, con experiencia ante la UIF.",
+    description: "Acompañamos a sujetos obligados en la construcción de un SPLAFT funcional y verificable: desde el diagnóstico de riesgos y el manual de prevención hasta el reporte ante la UIF-Perú y la atención de requerimientos y supervisiones.",
+    matters: ["Implementación del SPLAFT", "Manual y código de conducta LA/FT", "Designación y soporte al Oficial de Cumplimiento", "Debida diligencia del cliente y matriz de riesgos", "Registro de operaciones y ROS ante la UIF", "Atención de requerimientos y supervisiones"],
+    approach: ["Diagnóstico del nivel de riesgo y de las obligaciones aplicables", "Diseño de manual, controles y procedimientos operativos", "Capacitación, reportes y acompañamiento ante la UIF"],
+    icon: "splaft",
+  },
 ];
 
 export const professionals = [
@@ -93,7 +104,7 @@ export const professionals = [
     slug: "diego-gonzalo-cordova-poma",
     name: "Diego Gonzalo Córdova Poma",
     role: "Abogado asociado",
-    registry: "Colegiatura N.° 24191",
+    registry: "Colegiatura N.° 7268",
     image: "/media/diego-cordova-professional.png",
     focus: ["Derecho Federal", "Derecho Administrativo", "Contrataciones del Estado"],
     bio: "Especialista en el análisis estratégico de asuntos vinculados con la administración pública y la contratación estatal. Su práctica combina precisión normativa, evaluación de riesgos y acompañamiento cercano al cliente.",
