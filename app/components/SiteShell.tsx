@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
 import { contact, services, whatsappLink } from "../data";
 import { Icon } from "./Icon";
+import { ChatWidget } from "./ChatWidget";
 
 const nav = [
   { href: "/", label: "Inicio" },
