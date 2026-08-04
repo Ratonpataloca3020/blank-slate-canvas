@@ -18,11 +18,20 @@ if [[ ! -x "${vinext}" ]]; then
   exit 69
 fi
 
-echo "Running bounded vinext build..."
+if command -v node >/dev/null 2>&1; then
+  runner=(node)
+elif command -v bun >/dev/null 2>&1; then
+  runner=(bun --bun)
+else
+  echo "Neither node nor bun is available to run the build." >&2
+  exit 69
+fi
+
+echo "Running bounded vinext build with ${runner[0]}..."
 timeout \
   --signal=TERM \
   --kill-after="${SITES_BUILD_KILL_AFTER:-10s}" \
-  "${SITES_BUILD_TIMEOUT:-3m}" \
-  "${vinext}" build
+  "${SITES_BUILD_TIMEOUT:-5m}" \
+  "${runner[@]}" "${vinext}" build
 
 bash "${script_dir}/validate-artifact.sh"
