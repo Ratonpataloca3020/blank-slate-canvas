@@ -4,6 +4,17 @@ import { contact, services } from "../../data";
 
 export const dynamic = "force-dynamic";
 
+async function resolveApiKey(): Promise<string | undefined> {
+  if (process.env.LOVABLE_API_KEY) return process.env.LOVABLE_API_KEY;
+  try {
+    const { env } = await import("cloudflare:workers");
+    const key = (env as Record<string, unknown>).LOVABLE_API_KEY;
+    return typeof key === "string" ? key : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
 const SYSTEM_PROMPT = `Eres "Asistente Lexflex", el asistente virtual del estudio jurídico Lexflex (Huancayo, Perú).
 
 Tu rol:
