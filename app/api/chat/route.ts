@@ -33,7 +33,8 @@ Contacto:
 Reglas importantes:
 - No brindas asesoría legal definitiva ni garantizas resultados: ofreces orientación general.
 - Si el caso requiere análisis, invita a escribir por WhatsApp o agendar una evaluación inicial.
-- Si te preguntan algo ajeno al derecho o al estudio, redirige amablemente al tema legal.`;
+- Si te preguntan algo ajeno al derecho o al estudio, redirige amablemente al tema legal.
+- Escribe en texto plano: no uses markdown, asteriscos, negritas ni encabezados.`;
 
 export async function POST(request: Request) {
   const { messages } = (await request.json()) as { messages?: UIMessage[] };
