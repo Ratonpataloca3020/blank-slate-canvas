@@ -165,3 +165,44 @@ h1,h2,h3,p{margin-top:0} h1,h2,h3{font-family:var(--serif);font-weight:400}
 .chat-form button:disabled{opacity:.45}
 .chat-note{padding:0 14px 12px;color:#8b94a1;font-size:10px;line-height:1.5}
 @media (max-width:720px){.chat-launcher{right:14px;bottom:74px;width:50px;height:50px;min-height:50px;justify-content:center;padding:0}.chat-launcher span{display:none}.chat-panel{right:14px;bottom:74px}}
+
+/* assistant identity + reliable close */
+.chat-avatar{width:30px;height:30px;flex:none;border:1px solid rgba(198,163,90,.6);border-radius:50%;background:#0b1626;object-fit:cover;object-position:top center}
+.chat-avatar.lg{width:38px;height:38px}
+.chat-head>div{flex:1;min-width:0}
+.chat-close{display:flex;width:40px;height:40px;flex:none;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,.08);color:#f4e7c9;cursor:pointer;transition:.18s}
+.chat-close:hover{background:rgba(255,255,255,.18);transform:rotate(90deg)}
+.chat-backdrop{position:fixed;z-index:90;inset:0;background:rgba(3,10,18,.35);opacity:0;pointer-events:none;transition:opacity .22s}
+.chat-backdrop.open{opacity:1;pointer-events:auto}
+.chat-panel{z-index:95}
+.chat-panel:not(.open){pointer-events:none}
+.chat-launcher{z-index:93}
+.chat-launcher.is-open{background:#16253c}
+.chat-launcher:after{position:absolute;inset:-4px;border:1px solid rgba(198,163,90,.35);border-radius:44px;content:"";animation:pulseRing 2.8s ease-out infinite;pointer-events:none}
+.chat-launcher.is-open:after{display:none}
+@keyframes pulseRing{0%{opacity:.7;transform:scale(.96)}70%{opacity:0;transform:scale(1.12)}100%{opacity:0}}
+
+/* extra motion + polish across the site */
+@keyframes floatSoft{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes auroraShift{0%{transform:translate3d(-6%,0,0) scale(1)}50%{transform:translate3d(6%,-4%,0) scale(1.12)}100%{transform:translate3d(-6%,0,0) scale(1)}}
+@keyframes shimmerLine{0%{background-position:-220% 0}100%{background-position:220% 0}}
+.section{isolation:isolate}
+.section:before{position:absolute;z-index:-1;top:-120px;right:-140px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(217,172,85,.14),transparent 68%);content:"";animation:auroraShift 16s ease-in-out infinite;pointer-events:none;will-change:transform}
+.section:nth-of-type(even):before{right:auto;left:-160px;background:radial-gradient(circle,rgba(12,34,51,.12),transparent 68%);animation-duration:22s}
+.service-card,.catalog-card,.audience-card,.course-card,.article-card,.team-card{position:relative;overflow:hidden;transition:transform .35s cubic-bezier(.2,.75,.25,1),box-shadow .35s,border-color .35s;will-change:transform}
+.service-card:hover,.catalog-card:hover,.audience-card:hover,.course-card:hover,.article-card:hover,.team-card:hover{transform:translateY(-8px);box-shadow:0 26px 60px rgba(4,14,24,.16)}
+.catalog-card:before,.service-card:before{position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,var(--gold-400),transparent);background-size:220% 100%;content:"";opacity:0;transition:opacity .3s}
+.catalog-card:hover:before,.service-card:hover:before{opacity:1;animation:shimmerLine 1.6s linear infinite}
+.service-icon{transition:transform .35s cubic-bezier(.2,.75,.25,1)}
+.catalog-card:hover .service-icon,.service-card:hover .service-icon{transform:translateY(-4px) rotate(-6deg) scale(1.08)}
+.whatsapp-float{animation:floatSoft 4.5s ease-in-out infinite}
+.gold-rule{position:relative;overflow:hidden}
+.gold-rule:after{position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.75),transparent);background-size:220% 100%;content:"";animation:shimmerLine 3.4s linear infinite}
+.button.gold{position:relative;overflow:hidden}
+.button.gold:after{position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.5) 50%,transparent 65%);background-size:250% 100%;content:"";animation:shimmerLine 4s linear infinite;pointer-events:none}
+
+/* fluidity / performance */
+.section,.services-catalog,.audiences-grid{content-visibility:auto;contain-intrinsic-size:1px 720px}
+img{content-visibility:auto}
+.site-header,.chat-panel,.chat-launcher,.whatsapp-float{transform:translateZ(0);backface-visibility:hidden}
+@media (prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.08s!important;scroll-behavior:auto!important}}
