@@ -4,14 +4,30 @@ import { contact, services } from "../../data";
 
 export const dynamic = "force-dynamic";
 
-async function resolveApiKey(): Promise<string | undefined> {
-  if (process.env.LOVABLE_API_KEY) return process.env.LOVABLE_API_KEY;
+async function resolveKeys(): Promise<{
+  google?: string;
+  lovable?: string;
+}> {
+  const keys = {
+    google: process.env.GOOGLE_GENERATIVE_AI_API_KEY,
+    lovable: process.env.LOVABLE_API_KEY,
+  };
+  if (keys.google || keys.lovable) return keys;
   try {
     const { env } = await import("cloudflare:workers");
-    const key = (env as Record<string, unknown>).LOVABLE_API_KEY;
-    return typeof key === "string" ? key : undefined;
+    const bindings = env as Record<string, unknown>;
+    return {
+      google:
+        typeof bindings.GOOGLE_GENERATIVE_AI_API_KEY === "string"
+          ? bindings.GOOGLE_GENERATIVE_AI_API_KEY
+          : undefined,
+      lovable:
+        typeof bindings.LOVABLE_API_KEY === "string"
+          ? bindings.LOVABLE_API_KEY
+          : undefined,
+    };
   } catch {
-    return undefined;
+    return keys;
   }
 }
 
@@ -42,22 +58,30 @@ export async function POST(request: Request) {
     return new Response("Messages are required", { status: 400 });
   }
 
-  const apiKey = await resolveApiKey();
-  if (!apiKey) {
-    return new Response("Missing LOVABLE_API_KEY", { status: 500 });
+  const keys = await resolveKeys();
+  if (!keys.google && !keys.lovable) {
+    return new Response("Missing GOOGLE_GENERATIVE_AI_API_KEY", { status: 500 });
   }
 
-  const gateway = createOpenAICompatible({
-    name: "lovable",
-    baseURL: "https://ai.gateway.lovable.dev/v1",
-    headers: {
-      "Lovable-API-Key": apiKey,
-      "X-Lovable-AIG-SDK": "vercel-ai-sdk",
-    },
-  });
+  const provider = keys.google
+    ? createOpenAICompatible({
+        name: "google",
+        baseURL: "https://generativelanguage.googleapis.com/v1beta/openai",
+        headers: { Authorization: `Bearer ${keys.google}` },
+      })
+    : createOpenAICompatible({
+        name: "lovable",
+        baseURL: "https://ai.gateway.lovable.dev/v1",
+        headers: {
+          "Lovable-API-Key": keys.lovable ?? "",
+          "X-Lovable-AIG-SDK": "vercel-ai-sdk",
+        },
+      });
 
   const result = streamText({
-    model: gateway("google/gemini-3.6-flash"),
+    model: keys.google
+      ? provider("gemini-2.5-flash")
+      : provider("google/gemini-3.6-flash"),
     system: SYSTEM_PROMPT,
     messages: await convertToModelMessages(messages),
   });
