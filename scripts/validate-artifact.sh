@@ -19,10 +19,10 @@ hosting="${SITES_PROJECT_ROOT}/dist/.openai/hosting.json"
   exit 66
 }
 
-if command -v node >/dev/null 2>&1; then
-  validator=(node --input-type=module -)
-elif command -v bun >/dev/null 2>&1; then
+if command -v bun >/dev/null 2>&1; then
   validator=(bun run -)
+elif command -v node >/dev/null 2>&1 && node --version >/dev/null 2>&1; then
+  validator=(node --input-type=module -)
 else
   echo "Skipping artifact validation: no JS runtime available." >&2
   exit 0

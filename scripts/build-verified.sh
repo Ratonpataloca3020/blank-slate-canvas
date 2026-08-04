@@ -18,10 +18,10 @@ if [[ ! -x "${vinext}" ]]; then
   exit 69
 fi
 
-if command -v node >/dev/null 2>&1; then
-  runner=(node)
-elif command -v bun >/dev/null 2>&1; then
+if command -v bun >/dev/null 2>&1; then
   runner=(bun --bun)
+elif command -v node >/dev/null 2>&1 && node --version >/dev/null 2>&1; then
+  runner=(node)
 else
   echo "Neither node nor bun is available to run the build." >&2
   exit 69
