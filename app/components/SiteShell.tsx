@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
 import { contact, services, whatsappLink } from "../data";
 import { Icon } from "./Icon";
+import { ChatWidget } from "./ChatWidget";
 
 const nav = [
   { href: "/", label: "Inicio" },
@@ -58,5 +59,6 @@ export function SiteShell({ children }: { children: ReactNode }) {
       <div className="container footer-bottom"><span>© 2026 Lexflex. Todos los derechos reservados.</span><span>La información del sitio es orientativa y no sustituye asesoría legal para un caso concreto.</span></div>
     </footer>
     <a className="whatsapp-float" href={whatsappLink("Hola, vi el sitio web de Lexflex y quisiera realizar una consulta.")} target="_blank" rel="noreferrer" aria-label="Conversar con Lexflex por WhatsApp"><Icon name="whatsapp" size={26} /><span>Consulta directa</span></a>
+    <ChatWidget />
   </>;
 }
