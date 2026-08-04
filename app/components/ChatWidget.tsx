@@ -33,6 +33,15 @@ export function ChatWidget() {
     if (open && !busy) inputRef.current?.focus();
   }, [open, busy]);
 
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
   function submit(text: string) {
     const value = text.trim();
     if (!value || busy) return;
@@ -44,22 +53,30 @@ export function ChatWidget() {
   return (
     <>
       <button
+        type="button"
         className={"chat-launcher " + (open ? "is-open" : "")}
         onClick={() => setOpen(!open)}
         aria-label={open ? "Cerrar asistente Lexflex" : "Abrir asistente Lexflex"}
         aria-expanded={open}
       >
-        <Icon name={open ? "close" : "shield"} size={22} />
-        <span>Asistente Lexflex</span>
+        {open ? (
+          <Icon name="close" size={22} />
+        ) : (
+          <img className="chat-avatar" src="/media/diego-cordova-professional.png" alt="" />
+        )}
+        <span>Asistente Diego</span>
       </button>
+
+      <div className={"chat-backdrop " + (open ? "open" : "")} onClick={() => setOpen(false)} aria-hidden="true" />
 
       <section className={"chat-panel " + (open ? "open" : "")} aria-label="Asistente virtual de Lexflex">
         <header className="chat-head">
+          <img className="chat-avatar lg" src="/media/diego-cordova-professional.png" alt="Diego Córdova, asistente virtual" />
           <div>
-            <strong>Asistente Lexflex</strong>
+            <strong>Asistente Diego</strong>
             <span>Orientación legal preliminar · IA</span>
           </div>
-          <button onClick={() => setOpen(false)} aria-label="Cerrar asistente"><Icon name="close" size={18} /></button>
+          <button type="button" className="chat-close" onClick={() => setOpen(false)} aria-label="Cerrar asistente"><Icon name="close" size={20} /></button>
         </header>
 
         <div className="chat-log" ref={listRef}>
