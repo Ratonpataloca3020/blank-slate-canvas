@@ -14,6 +14,10 @@ const isCodexSeatbeltSandbox = process.env.CODEX_SANDBOX === "seatbelt";
 const localBindingConfig = {
   main: "./worker/index.ts",
   compatibility_flags: ["nodejs_compat"],
+  // Forwarded from the process env so local dev can reach server-side APIs.
+  vars: process.env.LOVABLE_API_KEY
+    ? { LOVABLE_API_KEY: process.env.LOVABLE_API_KEY }
+    : {},
   d1_databases: d1
     ? [
         {
