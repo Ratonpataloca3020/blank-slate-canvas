@@ -1,24 +1,33 @@
-# Blank Slate Canvas
+# Lexflex · Estudio Jurídico
 
-crea un sitio web en blanco, no me preguntes nada solo en blanco ni demores, reitero no pongas nada solo en blanco XD
+Sitio web institucional multiruta desarrollado para Lexflex. Incluye identidad visual, perfiles profesionales, seis áreas de práctica, Lexflex Formación, análisis jurídico, contacto directo por WhatsApp y SEO técnico.
 
-This project was built with [Lovable](https://lovable.dev).
+## Rutas
 
-## Build with Lovable
+- / — Inicio
+- /nosotros — Identidad y forma de trabajo
+- /servicios — Catálogo de áreas jurídicas
+- /servicios/[slug] — Página individual para cada especialidad
+- /equipo — Perfiles de ambos abogados
+- /cursos — Lexflex Formación
+- /blog — Análisis jurídico
+- /contacto — Datos, ubicación y formulario hacia WhatsApp
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/e2576811-97e3-4f1e-8b13-2d6a96346ccb).
+## Ejecutar
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+    npm ci
+    npm run dev
 
-## Development
+## Compilar
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+    npm run build
 
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
-```
+## Contenido editable
+
+Los datos principales se encuentran en app/data.ts. Las fotografías, logo y recursos están físicamente incluidos en public/media/; no dependen de enlaces temporales.
+
+Para publicar con un dominio propio, definir NEXT_PUBLIC_SITE_URL=https://dominio-final.com.
+
+## Verificación antes de publicar
+
+Revisar DATOS-PENDIENTES.md. Contiene dos diferencias detectadas entre el audio transcrito y el preview anterior que deben confirmarse con el cliente.
