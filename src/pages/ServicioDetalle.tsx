@@ -1,20 +1,18 @@
-import { Link } from "react-router-dom";
-import { notFound } from "next/navigation";
+import { Link, Navigate, useParams } from "react-router-dom";
 import { ContactCta } from "@/components/ContactCta";
 import { Icon } from "@/components/Icon";
 import { Reveal } from "@/components/Reveal";
 import { services } from "@/data";
+import { useSeo } from "@/lib/seo";
 
-type Props = { params: Promise<{ slug: string }> };
-export function generateStaticParams() { return services.map(service => ({ slug: service.slug })); }
-export async function generateMetadata({ params }: Props): Promise<Metadata> { const { slug } = await params; const service = services.find(item => item.slug === slug); return service ? { title: service.title, description: service.summary } : {}; }
-
-export default async function ServiceDetailPage({ params }: Props) {
-  const { slug } = await params;
+export default function ServiceDetailPage() {
+  const { slug } = useParams<{ slug: string }>();
   const service = services.find(item => item.slug === slug);
-  if (!service) notFound();
+  useSeo(service ? { title: service.title, description: service.summary } : { title: "Servicios" });
+  if (!service) return <Navigate to="/servicios" replace />;
   const related = services.filter(item => item.slug !== slug).slice(0, 3);
   return <main>
+
     <section className="service-detail-hero"><div className="service-detail-bg" /><div className="container service-detail-inner">
       <div className="breadcrumb"><Link to="/">Inicio</Link><span>/</span><Link to="/servicios">Servicios</Link><span>/</span><span>{service.shortTitle}</span></div>
       <div className="service-detail-title"><div className="service-detail-icon"><Icon name={service.icon} size={42} /></div><div><p className="eyebrow light">{service.eyebrow}</p><h1>{service.title}</h1></div></div>
