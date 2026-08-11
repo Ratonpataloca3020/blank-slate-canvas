@@ -3,9 +3,11 @@ import { Icon } from "@/components/Icon";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 import { courses, whatsappLink } from "@/data";
+import { useSeo } from "@/lib/seo";
 
 
 export default function CursosPage() {
+  useSeo({ title: "Lexflex Formación", description: "Cursos y contenidos jurídicos aplicados para profesionales, empresas y equipos públicos." });
   return <main>
     <PageHero eyebrow="Lexflex Formación" title="Aprender el derecho para aplicarlo mejor." intro="Cursos, talleres y contenidos jurídicos pensados para transformar la norma en decisiones y herramientas concretas." trail="Cursos" />
     <section className="section formation-manifesto"><div className="container formation-manifesto-grid"><Reveal><p className="eyebrow">Una nueva línea de Lexflex</p><h2>Formación rigurosa, lenguaje claro y enfoque práctico.</h2></Reveal><Reveal delay={90}><p className="large-copy dark-copy">Lexflex Formación se encuentra en preparación. Nuestro objetivo es crear experiencias de aprendizaje útiles para profesionales, proveedores, empresas y equipos públicos.</p><span className="coming-label">LANZAMIENTO PRÓXIMO</span></Reveal></div></section>

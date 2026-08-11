@@ -3,8 +3,10 @@ import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 import { contact, whatsappLink } from "@/data";
 import { ContactForm } from "@/components/ContactForm";
+import { useSeo } from "@/lib/seo";
 
 export default function ContactoPage() {
+  useSeo({ title: "Contacto", description: "Contacta directamente a Lexflex Estudio Jurídico en El Tambo, Huancayo." });
   return <main>
     <PageHero eyebrow="Contacto" title="El primer paso es ordenar la situación." intro="Converse directamente con nuestro equipo y conozca qué información necesitamos para realizar una evaluación inicial." trail="Contacto" />
     <section className="section contact-page-section"><div className="container contact-page-grid">

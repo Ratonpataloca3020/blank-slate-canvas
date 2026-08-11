@@ -5,7 +5,7 @@
   --ink:#11202a; --ivory:#f4f0e7; --paper:#fbfaf6; --gold-300:#efd28e;
   --gold-400:#d9ac55; --gold-500:#bd8230; --gold-600:#9f6823; --muted:#6e7478;
   --line:rgba(189,130,48,.34); --line-soft:rgba(17,32,42,.12);
-  --serif:Georgia,"Times New Roman",serif; --sans:var(--font-geist-sans),Arial,sans-serif;
+  --serif:Georgia,"Times New Roman",serif; --font-geist-sans:"Geist";--sans:var(--font-geist-sans),"Geist",Arial,sans-serif;
 }
 *{box-sizing:border-box} html{scroll-behavior:smooth;background:var(--navy-950)}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);overflow-x:hidden}

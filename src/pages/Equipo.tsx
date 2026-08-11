@@ -3,9 +3,11 @@ import { Icon } from "@/components/Icon";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 import { professionals } from "@/data";
+import { useSeo } from "@/lib/seo";
 
 
 export default function EquipoPage() {
+  useSeo({ title: "Equipo", description: "Conoce a Diego Gonzalo Córdova Poma y Luis Alberto Córdova Morales, abogados de Lexflex." });
   return <main>
     <PageHero eyebrow="Nuestro equipo" title="Profesionales que conocen el expediente y acompañan cada decisión." intro="Atención directa, especialidades complementarias y una práctica construida alrededor de la confianza." trail="Equipo" />
     <section className="section profiles-section"><div className="container">{professionals.map((person, index) => <Reveal className={"profile-row " + (index % 2 ? "reverse" : "")} key={person.slug}>

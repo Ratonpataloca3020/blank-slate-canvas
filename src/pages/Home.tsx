@@ -2,9 +2,11 @@ import { Link } from "react-router-dom";
 import { Icon } from "@/components/Icon";
 import { Reveal } from "@/components/Reveal";
 import { articles, contact, courses, professionals, services, whatsappLink } from "@/data";
+import { useSeo } from "@/lib/seo";
 
 
 export default function Home() {
+  useSeo({ title: "Estudio Jurídico en Huancayo", description: "Estudio jurídico en Huancayo: derecho administrativo, contrataciones del Estado, civil, gestión pública, compliance, SPLAFT y defensa especializada." });
   return <main>
     <section className="home-hero">
       <img className="hero-photo" src="/media/lexflex-hero-office.png" alt="Oficina jurídica contemporánea de Lexflex" />

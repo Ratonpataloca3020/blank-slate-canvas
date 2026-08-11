@@ -3,9 +3,11 @@ import { ContactCta } from "@/components/ContactCta";
 import { Icon } from "@/components/Icon";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
+import { useSeo } from "@/lib/seo";
 
 
 export default function NosotrosPage() {
+  useSeo({ title: "Nosotros", description: "Conoce la identidad, principios y forma de trabajo de Lexflex Estudio Jurídico." });
   return <main>
     <PageHero eyebrow="El estudio" title="Rigor jurídico con una forma de trabajo más humana." intro="Lexflex integra especialización, estrategia y comunicación directa para acompañar decisiones legales complejas con claridad." trail="Nosotros" />
     <section className="section story-section"><div className="container story-grid">

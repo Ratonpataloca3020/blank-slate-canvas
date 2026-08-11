@@ -3,6 +3,7 @@ import { Icon } from "@/components/Icon";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 import { articles } from "@/data";
+import { useSeo } from "@/lib/seo";
 
 const extraArticles = [
   { category: "Derecho civil", date: "Próximamente", title: "Cláusulas contractuales que conviene revisar antes de firmar", excerpt: "Responsabilidad, plazos, penalidades y solución de controversias en lenguaje claro." },
@@ -10,6 +11,7 @@ const extraArticles = [
   { category: "Defensa especializada", date: "Próximamente", title: "Documentos y contexto: cómo se construye una teoría del caso", excerpt: "La defensa técnica comienza con una reconstrucción ordenada de hechos, funciones y evidencia." },
 ];
 export default function BlogPage() {
+  useSeo({ title: "Análisis jurídico", description: "Análisis y contenidos jurídicos de Lexflex sobre derecho público, contratación estatal y compliance." });
   const allArticles = [...articles, ...extraArticles];
   return <main>
     <PageHero eyebrow="Análisis Lexflex" title="Comprender antes de decidir." intro="Ideas, criterios y explicaciones para reconocer riesgos y actuar con mayor seguridad jurídica." trail="Análisis" />

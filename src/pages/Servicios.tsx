@@ -4,9 +4,11 @@ import { Icon } from "@/components/Icon";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 import { services } from "@/data";
+import { useSeo } from "@/lib/seo";
 
 
 export default function ServiciosPage() {
+  useSeo({ title: "Áreas de práctica", description: "Asesoría legal especializada en derecho administrativo, contrataciones del Estado, civil, gestión pública, compliance, SPLAFT y defensa." });
   return <main>
     <PageHero eyebrow="Áreas de práctica" title="Especialización jurídica para decisiones que no admiten improvisación." intro="Abordamos asuntos públicos, civiles y de cumplimiento con análisis técnico, estrategia y acompañamiento directo." trail="Servicios" />
     <section className="section services-catalog-section"><div className="container">
