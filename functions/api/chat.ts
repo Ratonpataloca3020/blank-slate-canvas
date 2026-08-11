@@ -1,35 +1,9 @@
+// Cloudflare Pages Function (opcional): endpoint del asistente Diego.
+// No forma parte del build de Vite; Cloudflare Pages lo despliega automáticamente
+// si existe la variable de entorno GOOGLE_GENERATIVE_AI_API_KEY o LOVABLE_API_KEY.
 import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
 import { convertToModelMessages, streamText, type UIMessage } from "ai";
-import { contact, services } from "../../data";
-
-export const dynamic = "force-dynamic";
-
-async function resolveKeys(): Promise<{
-  google?: string;
-  lovable?: string;
-}> {
-  const keys = {
-    google: process.env.GOOGLE_GENERATIVE_AI_API_KEY,
-    lovable: process.env.LOVABLE_API_KEY,
-  };
-  if (keys.google || keys.lovable) return keys;
-  try {
-    const { env } = await import("cloudflare:workers");
-    const bindings = env as Record<string, unknown>;
-    return {
-      google:
-        typeof bindings.GOOGLE_GENERATIVE_AI_API_KEY === "string"
-          ? bindings.GOOGLE_GENERATIVE_AI_API_KEY
-          : undefined,
-      lovable:
-        typeof bindings.LOVABLE_API_KEY === "string"
-          ? bindings.LOVABLE_API_KEY
-          : undefined,
-    };
-  } catch {
-    return keys;
-  }
-}
+import { contact, services } from "../../src/data";
 
 const SYSTEM_PROMPT = `Eres "Diego", el asistente virtual del estudio jurídico Lexflex (Huancayo, Perú).
 
@@ -52,39 +26,46 @@ Reglas importantes:
 - Si te preguntan algo ajeno al derecho o al estudio, redirige amablemente al tema legal.
 - Escribe en texto plano: no uses markdown, asteriscos, negritas ni encabezados.`;
 
-export async function POST(request: Request) {
-  const { messages } = (await request.json()) as { messages?: UIMessage[] };
+type Env = {
+  GOOGLE_GENERATIVE_AI_API_KEY?: string;
+  LOVABLE_API_KEY?: string;
+};
+
+export const onRequestPost = async (context: {
+  request: Request;
+  env: Env;
+}): Promise<Response> => {
+  const { messages } = (await context.request.json()) as { messages?: UIMessage[] };
   if (!Array.isArray(messages)) {
     return new Response("Messages are required", { status: 400 });
   }
 
-  const keys = await resolveKeys();
-  if (!keys.google && !keys.lovable) {
+  const google = context.env.GOOGLE_GENERATIVE_AI_API_KEY;
+  const lovable = context.env.LOVABLE_API_KEY;
+  if (!google && !lovable) {
     return new Response("Missing GOOGLE_GENERATIVE_AI_API_KEY", { status: 500 });
   }
 
-  const provider = keys.google
+  const provider = google
     ? createOpenAICompatible({
         name: "google",
         baseURL: "https://generativelanguage.googleapis.com/v1beta/openai",
-        headers: { Authorization: `Bearer ${keys.google}` },
+        headers: { Authorization: `Bearer ${google}` },
       })
     : createOpenAICompatible({
         name: "lovable",
         baseURL: "https://ai.gateway.lovable.dev/v1",
         headers: {
-          "Lovable-API-Key": keys.lovable ?? "",
+          "Lovable-API-Key": lovable ?? "",
           "X-Lovable-AIG-SDK": "vercel-ai-sdk",
         },
       });
 
   const result = streamText({
-    model: keys.google
-      ? provider("gemini-2.5-flash")
-      : provider("google/gemini-3.6-flash"),
+    model: google ? provider("gemini-2.5-flash") : provider("google/gemini-3.6-flash"),
     system: SYSTEM_PROMPT,
     messages: await convertToModelMessages(messages),
   });
 
   return result.toUIMessageStreamResponse({ originalMessages: messages });
-}
+};
