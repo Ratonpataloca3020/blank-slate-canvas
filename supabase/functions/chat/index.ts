@@ -52,22 +52,31 @@ function jsonError(message: string, status: number) {
   });
 }
 
+// Partes que el SDK añade al historial (el asistente también genera
+// step-start/reasoning) y que no deben rechazar la conversación.
+const ALLOWED_PART_TYPES = new Set(["text", "step-start", "reasoning"]);
+
 function validateMessages(messages: unknown): messages is UIMessage[] {
   if (!Array.isArray(messages) || messages.length === 0 || messages.length > MAX_MESSAGES) return false;
   let total = 0;
+  let hasText = false;
   for (const message of messages) {
     if (!message || typeof message !== "object") return false;
     const role = (message as { role?: unknown }).role;
     if (role !== "user" && role !== "assistant" && role !== "system") return false;
     const parts = (message as { parts?: unknown }).parts;
-    if (!Array.isArray(parts)) return false;
+    if (!Array.isArray(parts) || parts.length === 0) return false;
     for (const part of parts) {
       const type = (part as { type?: unknown })?.type;
-      if (type !== "text" || typeof (part as { text?: unknown }).text !== "string") return false;
-      total += ((part as { text: string }).text || "").length;
+      if (typeof type !== "string" || !ALLOWED_PART_TYPES.has(type)) return false;
+      if (type === "text") {
+        if (typeof (part as { text?: unknown }).text !== "string") return false;
+        total += ((part as { text: string }).text || "").length;
+        hasText = true;
+      }
     }
   }
-  return total > 0 && total <= MAX_TOTAL_CHARS;
+  return hasText && total > 0 && total <= MAX_TOTAL_CHARS;
 }
 
 Deno.serve(async (request) => {
