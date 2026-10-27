@@ -4,6 +4,16 @@ import { DefaultChatTransport } from "ai";
 import { useEffect, useRef, useState } from "react";
 import { Icon } from "@/components/Icon";
 
+const CHAT_API = import.meta.env.VITE_SUPABASE_URL
+  ? `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/chat`
+  : "/api/chat";
+
+const chatHeaders = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY
+  ? { apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY }
+  : undefined;
+
+const chatTransport = new DefaultChatTransport({ api: CHAT_API, headers: chatHeaders });
+
 const SUGGESTIONS = [
   "¿Qué áreas atiende Lexflex?",
   "Tengo un problema con una entidad pública",
@@ -18,7 +28,7 @@ export function ChatWidget() {
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
   const { messages, sendMessage, status } = useChat({
-    transport: new DefaultChatTransport({ api: "/api/chat" }),
+    transport: chatTransport,
     onError: (err) => setError(err.message || "No pudimos responder en este momento."),
   });
 
