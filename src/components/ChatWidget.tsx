@@ -3,14 +3,11 @@ import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
 import { useEffect, useRef, useState } from "react";
 import { Icon } from "@/components/Icon";
+import { backendPublishableKey, backendUrl } from "@/lib/backend";
 
-const CHAT_API = import.meta.env.VITE_SUPABASE_URL
-  ? `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/chat`
-  : "/api/chat";
+const CHAT_API = `${backendUrl}/functions/v1/chat`;
 
-const chatHeaders = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY
-  ? { apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY }
-  : undefined;
+const chatHeaders = { apikey: backendPublishableKey };
 
 const chatTransport = new DefaultChatTransport({ api: CHAT_API, headers: chatHeaders });
 
