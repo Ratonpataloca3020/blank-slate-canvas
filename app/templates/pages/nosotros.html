@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main>
+    <section class="page-hero">
+        <div class="page-hero-photo"></div>
+        <div class="page-hero-grid"></div>
+        <div class="container page-hero-inner">
+            <nav class="breadcrumb"><a href="/">Inicio</a> / <span>Nosotros</span></nav>
+            <p class="eyebrow light">El estudio</p>
+            <h1>Lex flex · Derecho flexible, criterio firme.</h1>
+            <p>Lexflex nació como respuesta a una necesidad: hacer el derecho más claro, estratégico y cercano para quienes enfrentan situaciones complejas.</p>
+        </div>
+    </section>
+
+    <section class="section story-section">
+        <div class="container story-grid">
+            <div class="reveal story-brand-panel">
+                <img src="/static/media/lexflex-logo.svg" alt="Lexflex">
+                <div class="brand-concept"><span>Lex</span><i></i><span>Flex</span></div>
+                <p>DERECHO · FLEXIBLE · FIRME</p>
+            </div>
+            <div class="reveal story-copy" style="transition-delay: 100ms;">
+                <p class="eyebrow">Nuestra historia</p>
+                <h2>Un estudio construido desde la práctica, no desde el modelo.</h2>
+                <p>Lexflex nace de la experiencia compartida en asuntos públicos, civiles y de cumplimiento, con la convicción de que el derecho debe servir para tomar mejores decisiones, no para complicar más las cosas.</p>
+                <p>No repetimos argumentos estándar ni ofrecemos respuestas genéricas. Cada asunto es distinto, y por eso cada estrategia se construye desde el análisis, la evidencia y el resultado que el cliente realmente necesita.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section values-section">
+        <div class="container">
+            <div class="reveal section-heading centered light-heading">
+                <p class="eyebrow light">Valores</p>
+                <h2>Cómo trabajamos y qué defendemos.</h2>
+            </div>
+            <div class="values-grid">
+                {% set values = [
+                    ["01", "Rigor técnico", "Cada recomendación parte de los hechos, la normativa aplicable y la jurisprudencia relevante."],
+                    ["02", "Comunicación directa", "Sin tecnicismos innecesarios. La estrategia se explica con claridad y contexto."],
+                    ["03", "Reserva profesional", "La confidencialidad es un compromiso desde el primer contacto."],
+                    ["04", "Prevención", "Actuamos antes de que los problemas escalen. Anticipar siempre será mejor que remediar."],
+                    ["05", "Estrategia adaptable", "No hay fórmulas fijas. La ruta se ajusta al caso, al contexto y al objetivo."],
+                    ["06", "Responsabilidad", "Nos involucramos en cada asunto como si fuera el único. Porque para el cliente, lo es."]
+                ] %}
+                {% for number, title, text in values %}
+                <div class="reveal value-card" style="transition-delay: {{ loop.index0 * 50 }}ms;">
+                    <span>{{ number }}</span>
+                    <h3>{{ title }}</h3>
+                    <p>{{ text }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section class="section model-section">
+        <div class="container model-grid">
+            <div class="reveal model-copy">
+                <p class="eyebrow">Modelo de trabajo</p>
+                <h2>Cuatro fases que ordenan la estrategia.</h2>
+                <p>La práctica jurídica funciona mejor cuando hay método. Nuestro proceso está diseñado para escuchar, analizar, proponer y ejecutar con claridad.</p>
+                <div class="model-checks">
+                    <span>{% include 'components/icons/check.html' %} Cada etapa tiene un responsable y un objetivo claro</span>
+                    <span>{% include 'components/icons/check.html' %} Informes escritos en cada avance relevante</span>
+                    <span>{% include 'components/icons/check.html' %} Coordinación permanente con el cliente</span>
+                </div>
+            </div>
+            <div class="reveal model-visual" style="transition-delay: 100ms;">
+                {% set model_steps = [
+                    ["01", "ESCUCHA", "Conocemos el contexto, los antecedentes y el resultado esperado."],
+                    ["02", "ANÁLISIS", "Evaluamos riesgos, plazos, alternativas y restricciones."],
+                    ["03", "ESTRATEGIA", "Proponemos una ruta clara, con fundamentos y acciones concretas."],
+                    ["04", "EJECUCIÓN", "Acompañamos el proceso, informamos avances y ajustamos cuando corresponde."]
+                ] %}
+                {% for number, label, description in model_steps %}
+                <div class="model-pair">
+                    <div class="model-number">{{ number }}</div>
+                    <div>
+                        <small>{{ label }}</small>
+                        <strong>{{ description }}</strong>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

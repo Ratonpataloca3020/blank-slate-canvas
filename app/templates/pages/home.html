@@ -1,0 +1,358 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main>
+    <!-- Home Hero Section -->
+    <section class="home-hero">
+        <img class="hero-photo" src="/static/media/lexflex-hero-office.png" alt="Oficina jurídica contemporánea de Lexflex">
+        <div class="hero-shade"></div>
+        <div class="hero-lines"></div>
+        <div class="floating-orb orb-one"></div>
+        <div class="floating-orb orb-two"></div>
+        
+        <div class="container hero-content">
+            <div class="hero-copy">
+                <p class="eyebrow light">Estudio jurídico · Huancayo</p>
+                <h1>Estrategia legal para convertir la complejidad en <span>decisiones claras.</span></h1>
+                <p class="hero-lead">Asesoría y defensa especializada para personas, empresas y organizaciones que necesitan criterio, respuesta y acompañamiento real.</p>
+                
+                <div class="hero-actions">
+                    <a class="button gold" href="{{ whatsapp_link('Hola, quisiera conversar con un abogado de Lexflex sobre mi caso.') }}" target="_blank" rel="noreferrer">
+                        Evaluar mi caso {% include 'components/icons/arrow.html' %}
+                    </a>
+                    <a class="button ghost" href="/servicios">Conocer las áreas</a>
+                </div>
+                
+                <div class="hero-proof">
+                    <span>{% include 'components/icons/shield.html' %} Confidencialidad desde el primer contacto</span>
+                    <span>{% include 'components/icons/clock.html' %} Atención presencial y virtual</span>
+                </div>
+            </div>
+            
+            <aside class="hero-dossier" aria-label="Atención Lexflex">
+                <div class="dossier-topline">
+                    <span>LEXFLEX / ATENCIÓN DIRECTA</span>
+                    <i></i>
+                </div>
+                <h2>Su asunto merece una lectura completa, no una respuesta automática.</h2>
+                <p>En Lexflex el contacto conduce directamente a nuestro equipo. Sin chatbots ni formularios interminables.</p>
+                
+                <div class="dossier-team">
+                    <div class="portrait-stack">
+                        {% for person in professionals %}
+                        <img src="{{ person.image }}" alt="{{ person.name }}">
+                        {% endfor %}
+                    </div>
+                    <div>
+                        <strong>Dos perspectivas jurídicas</strong>
+                        <span>Una estrategia coordinada</span>
+                    </div>
+                </div>
+                
+                <a href="tel:+{{ contact.whatsapp }}" class="dossier-link">
+                    {% include 'components/icons/phone.html' %}
+                    {{ contact.whatsapp_display }}
+                </a>
+            </aside>
+        </div>
+        
+        <a class="scroll-cue" href="#areas">
+            <span></span> Descubrir Lexflex
+        </a>
+    </section>
+
+    <!-- Principles Strip -->
+    <section class="principles-strip">
+        <div class="container principles-grid">
+            <div class="principle">
+                <span>01</span>
+                <div>
+                    <strong>Análisis riguroso</strong>
+                    <p>Cada recomendación parte de los hechos y la evidencia.</p>
+                </div>
+            </div>
+            <div class="principle">
+                <span>02</span>
+                <div>
+                    <strong>Comunicación directa</strong>
+                    <p>Explicamos la estrategia con claridad y sin rodeos.</p>
+                </div>
+            </div>
+            <div class="principle">
+                <span>03</span>
+                <div>
+                    <strong>Prevención de riesgos</strong>
+                    <p>Actuamos antes de que un problema gane terreno.</p>
+                </div>
+            </div>
+            <div class="principle">
+                <span>04</span>
+                <div>
+                    <strong>Defensa personalizada</strong>
+                    <p>No existen respuestas en serie para asuntos distintos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section services-section" id="areas">
+        <div class="container">
+            <div class="reveal section-heading heading-split">
+                <div>
+                    <p class="eyebrow">Áreas de práctica</p>
+                    <h2>Especialización que se conecta alrededor de su caso.</h2>
+                </div>
+                <div>
+                    <p>Integramos derecho público, práctica civil, cumplimiento y defensa especializada para abordar el problema completo, no solo una parte del expediente.</p>
+                    <a href="/servicios" class="text-link">
+                        Ver todos los servicios {% include 'components/icons/arrow.html' %}
+                    </a>
+                </div>
+            </div>
+            
+            <div class="services-grid">
+                {% for service in services %}
+                <div class="reveal service-card" style="transition-delay: {{ loop.index0 * 70 }}ms;">
+                    <a href="/servicios/{{ service.slug }}" style="text-decoration: none; color: inherit; display: contents;">
+                        <div class="service-number">0{{ loop.index }}</div>
+                        <div class="service-icon">
+                            {% include 'components/icons/' + service.icon + '.html' %}
+                        </div>
+                        <p>{{ service.eyebrow }}</p>
+                        <h3>{{ service.title }}</h3>
+                        <span>{{ service.summary }}</span>
+                        <div class="service-arrow">
+                            Explorar {% include 'components/icons/arrow.html' %}
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Identity Section -->
+    <section class="section identity-section">
+        <div class="identity-watermark">LF</div>
+        <div class="container identity-grid">
+            <div class="reveal identity-visual">
+                <div class="portrait-window portrait-main">
+                    <img src="{{ professionals[0].image }}" alt="{{ professionals[0].name }}">
+                </div>
+                <div class="portrait-window portrait-secondary">
+                    <img src="{{ professionals[1].image }}" alt="{{ professionals[1].name }}">
+                </div>
+                <div class="gold-seal">
+                    <span>LF</span>
+                    <small>CRITERIO · ESTRATEGIA · DEFENSA</small>
+                </div>
+            </div>
+            
+            <div class="reveal identity-copy" style="transition-delay: 100ms;">
+                <p class="eyebrow light">Nuestra identidad</p>
+                <h2>Lexflex nace para hacer el derecho más claro, estratégico y cercano.</h2>
+                <p class="large-copy">Reunimos experiencia en asuntos públicos, civiles y de cumplimiento bajo una forma de trabajo exigente: escuchar, comprender y actuar con propósito.</p>
+                
+                <div class="identity-values">
+                    <div>
+                        <strong>Flexible en el enfoque</strong>
+                        <span>La estrategia se adapta al caso, no al revés.</span>
+                    </div>
+                    <div>
+                        <strong>Firme en el estándar</strong>
+                        <span>Rigor técnico, reserva y comunicación permanente.</span>
+                    </div>
+                </div>
+                
+                <a href="/nosotros" class="button outline-gold">
+                    Conocer el estudio {% include 'components/icons/arrow.html' %}
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="section team-section">
+        <div class="container">
+            <div class="reveal section-heading centered">
+                <p class="eyebrow">Profesionales</p>
+                <h2>Experiencia complementaria, atención verdaderamente directa.</h2>
+                <p>Los asuntos son acompañados por los abogados responsables de construir y sostener la estrategia.</p>
+            </div>
+            
+            <div class="team-grid">
+                {% for person in professionals %}
+                <div class="reveal team-card" style="transition-delay: {{ loop.index0 * 100 }}ms;">
+                    <article>
+                        <div class="team-photo">
+                            <img src="{{ person.image }}" alt="{{ person.name }}">
+                            <span>{{ person.role }}</span>
+                        </div>
+                        <div class="team-info">
+                            <p>{{ person.registry }}</p>
+                            <h3>{{ person.name }}</h3>
+                            <div class="focus-tags">
+                                {% for item in person.focus[:3] %}
+                                <span>{{ item }}</span>
+                                {% endfor %}
+                            </div>
+                            <a href="/equipo" class="text-link dark-link">
+                                Ver perfil profesional {% include 'components/icons/arrow.html' %}
+                            </a>
+                        </div>
+                    </article>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Formation Section -->
+    <section class="section formation-section">
+        <div class="marble-noise"></div>
+        <div class="container">
+            <div class="reveal formation-intro">
+                <div>
+                    <p class="eyebrow">Lexflex Formación</p>
+                    <h2>Conocimiento jurídico aplicado a decisiones reales.</h2>
+                </div>
+                <div>
+                    <p>Próximamente: cursos y contenidos para profesionales, empresas y equipos públicos que buscan comprender y aplicar mejor el derecho.</p>
+                    <span class="coming-label">PRÓXIMAMENTE</span>
+                </div>
+            </div>
+            
+            <div class="course-grid">
+                {% for course in courses %}
+                <div class="reveal course-card" style="transition-delay: {{ loop.index0 * 80 }}ms;">
+                    <article>
+                        <span class="course-index">0{{ loop.index }}</span>
+                        <p>{{ course.category }}</p>
+                        <h3>{{ course.title }}</h3>
+                        <div class="gold-rule"></div>
+                        <span>{{ course.description }}</span>
+                        <a href="{{ whatsapp_link('Hola, quisiera recibir información cuando esté disponible el curso: ' + course.title) }}" 
+                           target="_blank" rel="noreferrer" class="text-link dark-link">
+                            Avisarme cuando esté disponible {% include 'components/icons/arrow.html' %}
+                        </a>
+                    </article>
+                </div>
+                {% endfor %}
+            </div>
+            
+            <div class="formation-footer">
+                <a href="/cursos" class="button navy">
+                    Conocer Lexflex Formación {% include 'components/icons/arrow.html' %}
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="section process-section">
+        <div class="container process-grid">
+            <div class="reveal process-copy">
+                <p class="eyebrow light">Cómo trabajamos</p>
+                <h2>Una ruta clara desde la primera conversación.</h2>
+                <p>La estrategia jurídica funciona mejor cuando cada decisión tiene una razón, un responsable y un siguiente paso.</p>
+                <a class="button gold" href="{{ whatsapp_link('Hola, quisiera iniciar una consulta y conocer cómo trabajarían mi caso.') }}" target="_blank" rel="noreferrer">
+                    Iniciar una consulta {% include 'components/icons/arrow.html' %}
+                </a>
+            </div>
+            
+            <div class="process-steps">
+                {% set steps = [
+                    ["01", "Escuchamos y ordenamos", "Conocemos el contexto, los documentos y el resultado que necesita."],
+                    ["02", "Evaluamos escenarios", "Identificamos riesgos, plazos, alternativas y prioridades."],
+                    ["03", "Definimos la estrategia", "Proponemos una ruta comprensible, con acciones concretas."],
+                    ["04", "Acompañamos la ejecución", "Damos seguimiento, informamos avances y ajustamos cuando corresponde."]
+                ] %}
+                {% for number, title, text in steps %}
+                <div class="reveal process-step" style="transition-delay: {{ loop.index0 * 70 }}ms;">
+                    <span>{{ number }}</span>
+                    <div>
+                        <h3>{{ title }}</h3>
+                        <p>{{ text }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Journal Section -->
+    <section class="section journal-section">
+        <div class="container">
+            <div class="reveal section-heading heading-split">
+                <div>
+                    <p class="eyebrow">Análisis Lexflex</p>
+                    <h2>Ideas útiles para anticipar decisiones jurídicas.</h2>
+                </div>
+                <div>
+                    <p>Contenido claro sobre asuntos que afectan a personas, proveedores, empresas y equipos públicos.</p>
+                    <a href="/blog" class="text-link dark-link">
+                        Ver todos los análisis {% include 'components/icons/arrow.html' %}
+                    </a>
+                </div>
+            </div>
+            
+            <div class="article-grid">
+                {% for article in articles %}
+                <div class="reveal article-card" style="transition-delay: {{ loop.index0 * 80 }}ms;">
+                    <article>
+                        <div class="article-top">
+                            <span>{{ article.category }}</span>
+                            <small>{{ article.date }}</small>
+                        </div>
+                        <h3>{{ article.title }}</h3>
+                        <p>{{ article.excerpt }}</p>
+                        <a href="/blog">Leer análisis {% include 'components/icons/arrow.html' %}</a>
+                    </article>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Band -->
+    <section class="contact-band">
+        <div class="container contact-band-grid">
+            <div class="reveal contact-band-copy">
+                <p class="eyebrow light">Hablemos de su caso</p>
+                <h2>Una decisión a tiempo puede cambiar todo el escenario.</h2>
+                <p>Cuéntenos brevemente qué está ocurriendo. El contacto es directo con el equipo de Lexflex.</p>
+                
+                <div class="hero-actions">
+                    <a class="button gold" href="{{ whatsapp_link('Hola, quisiera solicitar una evaluación inicial con Lexflex.') }}" target="_blank" rel="noreferrer">
+                        Escribir por WhatsApp {% include 'components/icons/whatsapp.html' %}
+                    </a>
+                    <a class="button ghost" href="/contacto">Ver datos de contacto</a>
+                </div>
+            </div>
+            
+            <div class="reveal location-card" style="transition-delay: 100ms;">
+                <div class="location-map">
+                    <span class="map-road road-one"></span>
+                    <span class="map-road road-two"></span>
+                    <span class="map-road road-three"></span>
+                    <div class="map-pin">
+                        <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/>
+                            <circle cx="12" cy="10" r="2.5"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="location-copy">
+                    <span>OFICINA LEXFLEX</span>
+                    <strong>{{ contact.address }}</strong>
+                    <p>{{ contact.district }}</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Jr.+Parra+del+Riego+338+El+Tambo+Huancayo" target="_blank" rel="noreferrer">
+                        Abrir en Google Maps {% include 'components/icons/arrow.html' %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

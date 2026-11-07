@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main>
+    <section class="page-hero">
+        <div class="page-hero-photo"></div>
+        <div class="page-hero-grid"></div>
+        <div class="container page-hero-inner">
+            <nav class="breadcrumb"><a href="/">Inicio</a> / <span>Análisis</span></nav>
+            <p class="eyebrow light">Análisis Lexflex</p>
+            <h1>Ideas útiles para anticipar decisiones jurídicas.</h1>
+            <p>Contenido claro sobre asuntos que afectan a personas, proveedores, empresas y equipos públicos.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="editorial-grid">
+                {% for article in articles %}
+                <div class="reveal article-card" style="transition-delay: {{ loop.index0 * 80 }}ms;">
+                    <div class="article-top">
+                        <span>{{ article.category }}</span>
+                        <small>{{ article.date }}</small>
+                    </div>
+                    <h3>{{ article.title }}</h3>
+                    <p>{{ article.excerpt }}</p>
+                    <a href="#">Leer análisis {% include 'components/icons/arrow.html' %}</a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section class="inner-cta">
+        <div class="container">
+            <div class="reveal">
+                <p class="eyebrow light">¿Tiene una duda específica?</p>
+                <h2>Converse con nuestro equipo para una evaluación directa.</h2>
+                <a class="button gold" href="{{ whatsapp_link('Hola, quisiera realizar una consulta sobre un tema jurídico.') }}" target="_blank" rel="noreferrer">
+                    Escribir a Lexflex {% include 'components/icons/whatsapp.html' %}
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

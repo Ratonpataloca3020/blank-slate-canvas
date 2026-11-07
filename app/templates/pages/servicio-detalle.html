@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main>
+    <section class="service-detail-hero">
+        <div class="service-detail-bg"></div>
+        <div class="page-hero-grid"></div>
+        <div class="container service-detail-inner">
+            <nav class="breadcrumb">
+                <a href="/">Inicio</a> / <a href="/servicios">Servicios</a> / <span>{{ service.short_title }}</span>
+            </nav>
+            <p class="eyebrow light">{{ service.eyebrow }}</p>
+            <div class="service-detail-title">
+                <div class="service-detail-icon">
+                    {% include 'components/icons/' + service.icon + '.html' %}
+                </div>
+                <h1>{{ service.title }}</h1>
+            </div>
+            <p class="service-detail-lead">{{ service.summary }}</p>
+        </div>
+    </section>
+
+    <section class="section service-overview">
+        <div class="container service-overview-grid">
+            <div class="reveal">
+                <h2>Qué hacemos</h2>
+            </div>
+            <div class="reveal" style="transition-delay: 100ms;">
+                <p class="large-copy dark-copy">{{ service.description }}</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section matter-section">
+        <div class="container">
+            <div class="reveal">
+                <p class="eyebrow">Asuntos que atendemos</p>
+                <h2>Ámbitos específicos dentro de {{ service.short_title }}.</h2>
+            </div>
+            <div class="matter-grid">
+                {% for matter in service.matters %}
+                <div class="reveal matter-card" style="transition-delay: {{ loop.index0 * 60 }}ms;">
+                    <span>0{{ loop.index }}</span>
+                    {% include 'components/icons/check.html' %}
+                    <h3>{{ matter }}</h3>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section class="section approach-section">
+        <div class="container approach-grid">
+            <div class="reveal approach-intro">
+                <p class="eyebrow light">Método de trabajo</p>
+                <h2>Cómo abordamos este tipo de asuntos.</h2>
+            </div>
+            <div class="reveal approach-list" style="transition-delay: 100ms;">
+                {% for step in service.approach %}
+                <div class="approach-item">
+                    <span>0{{ loop.index }}</span>
+                    <div>
+                        <h3>{{ step.split('.')[0] if '.' in step else step }}</h3>
+                        <p>{{ step }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section class="section related-section">
+        <div class="container">
+            <div class="reveal">
+                <p class="eyebrow">Otras áreas</p>
+                <h2>También podría interesarle</h2>
+            </div>
+            <div class="related-grid">
+                {% for other in other_services %}
+                <div class="reveal related-card" style="transition-delay: {{ loop.index0 * 70 }}ms;">
+                    <a href="/servicios/{{ other.slug }}" style="text-decoration: none; color: inherit;">
+                        {% include 'components/icons/' + other.icon + '.html' %}
+                        <h3>{{ other.short_title }}</h3>
+                        <p>{{ other.summary }}</p>
+                        <span>Conocer más {% include 'components/icons/arrow.html' %}</span>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section class="inner-cta">
+        <div class="container">
+            <div class="reveal">
+                <p class="eyebrow light">¿Este es su caso?</p>
+                <h2>Converse con nosotros para una evaluación inicial.</h2>
+                <a class="button gold" href="{{ whatsapp_link('Hola, quisiera consultar sobre ' + service.short_title + '.') }}" target="_blank" rel="noreferrer">
+                    Solicitar orientación {% include 'components/icons/whatsapp.html' %}
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

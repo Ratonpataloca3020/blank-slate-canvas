@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main>
+    <section class="page-hero">
+        <div class="page-hero-photo"></div>
+        <div class="page-hero-grid"></div>
+        <div class="container page-hero-inner">
+            <nav class="breadcrumb"><a href="/">Inicio</a> / <span>Cursos</span></nav>
+            <p class="eyebrow light">Lexflex Formación</p>
+            <h1>Conocimiento jurídico aplicado a decisiones reales.</h1>
+            <p>Próximamente: cursos y contenidos para profesionales, empresas y equipos públicos que buscan comprender y aplicar mejor el derecho.</p>
+            <div class="page-hero-accent"><i></i> PRÓXIMAMENTE</div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="reveal">
+                <p class="eyebrow">Catálogo de cursos</p>
+                <h2>Formación práctica diseñada para contextos reales.</h2>
+            </div>
+            <div class="course-detail-grid">
+                {% for course in courses %}
+                <div class="reveal course-card" style="transition-delay: {{ loop.index0 * 80 }}ms;">
+                    <span class="course-index">0{{ loop.index }}</span>
+                    <p>{{ course.category }}</p>
+                    <h3>{{ course.title }}</h3>
+                    <div class="gold-rule"></div>
+                    <span>{{ course.description }}</span>
+                    <a href="{{ whatsapp_link('Hola, quisiera recibir información cuando esté disponible el curso: ' + course.title) }}" target="_blank" rel="noreferrer" class="text-link dark-link">
+                        Avisarme cuando esté disponible {% include 'components/icons/arrow.html' %}
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

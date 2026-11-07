@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main>
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="page-hero-photo"></div>
+        <div class="page-hero-grid"></div>
+        <div class="container page-hero-inner">
+            <nav class="breadcrumb">
+                <a href="/">Inicio</a> / <span>Servicios</span>
+            </nav>
+            <p class="eyebrow light">Áreas de práctica</p>
+            <h1>Especialización jurídica para decisiones que no admiten improvisación.</h1>
+            <p>Abordamos asuntos públicos, civiles y de cumplimiento con análisis técnico, estrategia y acompañamiento directo.</p>
+        </div>
+    </section>
+
+    <!-- Services Catalog -->
+    <section class="section services-catalog-section">
+        <div class="container">
+            <div class="reveal catalog-intro">
+                <p class="eyebrow">Servicios Lexflex</p>
+                <h2>Elija el área más cercana a su situación.</h2>
+                <p>Si su caso involucra más de una especialidad, nuestro equipo evaluará la conexión y propondrá una estrategia coordinada.</p>
+            </div>
+            
+            <div class="services-catalog">
+                {% for service in services %}
+                <div class="reveal catalog-card" style="transition-delay: {{ loop.index0 * 60 }}ms;">
+                    <a href="/servicios/{{ service.slug }}" style="text-decoration: none; color: inherit;">
+                        <div class="catalog-card-head">
+                            <span>0{{ loop.index }}</span>
+                            <div class="service-icon">
+                                {% include 'components/icons/' + service.icon + '.html' %}
+                            </div>
+                        </div>
+                        <p>{{ service.eyebrow }}</p>
+                        <h2>{{ service.title }}</h2>
+                        <div class="gold-rule"></div>
+                        <span>{{ service.summary }}</span>
+                        <ul>
+                            {% for matter in service.matters[:3] %}
+                            <li>{{ matter }}</li>
+                            {% endfor %}
+                        </ul>
+                        <strong>Ver servicio {% include 'components/icons/arrow.html' %}</strong>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Audiences Section -->
+    <section class="section audiences-section">
+        <div class="container">
+            <div class="reveal section-heading centered light-heading">
+                <p class="eyebrow light">A quiénes asesoramos</p>
+                <h2>Soluciones diseñadas para el contexto de cada cliente.</h2>
+            </div>
+            
+            <div class="audiences-grid">
+                {% set audiences = [
+                    ["Personas", "Protección de derechos, patrimonio y defensa frente a procedimientos."],
+                    ["Empresas y proveedores", "Prevención, contratación pública, cumplimiento y contingencias."],
+                    ["Funcionarios y servidores", "Asesoría y defensa frente a responsabilidades e investigaciones."],
+                    ["Entidades y equipos públicos", "Opiniones legales, revisión de procesos y asistencia especializada."]
+                ] %}
+                {% for title, text in audiences %}
+                <div class="reveal audience-card" style="transition-delay: {{ loop.index0 * 70 }}ms;">
+                    <span>0{{ loop.index }}</span>
+                    <h3>{{ title }}</h3>
+                    <p>{{ text }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section class="inner-cta">
+        <div class="container">
+            <div class="reveal">
+                <p class="eyebrow light">¿No está seguro de qué área corresponde a su caso?</p>
+                <h2>Descríbanos la situación y le orientamos.</h2>
+                <a class="button gold" href="{{ whatsapp_link('Hola, quisiera consultar sobre mi situación legal.') }}" target="_blank" rel="noreferrer">
+                    Conversar con Lexflex {% include 'components/icons/whatsapp.html' %}
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

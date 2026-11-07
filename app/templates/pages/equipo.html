@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main>
+    <section class="page-hero">
+        <div class="page-hero-photo"></div>
+        <div class="page-hero-grid"></div>
+        <div class="container page-hero-inner">
+            <nav class="breadcrumb"><a href="/">Inicio</a> / <span>Equipo</span></nav>
+            <p class="eyebrow light">Profesionales</p>
+            <h1>Experiencia complementaria, atención directa.</h1>
+            <p>Los asuntos son acompañados directamente por los abogados responsables de construir y sostener la estrategia.</p>
+        </div>
+    </section>
+
+    <section class="section profiles-section">
+        <div class="container">
+            {% for person in professionals %}
+            <div class="profile-row {% if loop.index0 % 2 == 1 %}reverse{% endif %}">
+                <div class="profile-photo-wrap">
+                    <div class="profile-photo">
+                        <img src="{{ person.image }}" alt="{{ person.name }}">
+                    </div>
+                    <div class="profile-mark">{{ loop.index }}</div>
+                </div>
+                <div class="profile-copy">
+                    <h2>{{ person.name }}</h2>
+                    <span class="profile-registry">{{ person.registry }}</span>
+                    <p class="dark-copy">{{ person.bio }}</p>
+                    <div class="profile-focus">
+                        <h3>Áreas de especialización</h3>
+                        {% for area in person.focus %}
+                        <span>{% include 'components/icons/check.html' %} {{ area }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="inner-cta">
+        <div class="container">
+            <div class="reveal">
+                <p class="eyebrow light">Converse con nuestro equipo</p>
+                <h2>El contacto es directo y la primera orientación es sin costo.</h2>
+                <a class="button gold" href="{{ whatsapp_link('Hola, quisiera conversar con un abogado de Lexflex.') }}" target="_blank" rel="noreferrer">
+                    Solicitar orientación {% include 'components/icons/whatsapp.html' %}
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

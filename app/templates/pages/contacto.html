@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main>
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="page-hero-photo"></div>
+        <div class="page-hero-grid"></div>
+        <div class="container page-hero-inner">
+            <nav class="breadcrumb">
+                <a href="/">Inicio</a> / <span>Contacto</span>
+            </nav>
+            <p class="eyebrow light">Contacto</p>
+            <h1>El primer paso es ordenar la situación.</h1>
+            <p>Converse directamente con nuestro equipo y conozca qué información necesitamos para realizar una evaluación inicial.</p>
+        </div>
+    </section>
+
+    <!-- Contact Info Section -->
+    <section class="section contact-page-section">
+        <div class="container contact-page-grid">
+            <div class="reveal contact-info-column">
+                <p class="eyebrow">Atención Lexflex</p>
+                <h2>Presencial en Huancayo. Coordinación virtual en todo el Perú.</h2>
+                <p>Puede escribirnos por WhatsApp, llamar o enviar un correo. Para una primera coordinación, indique el tipo de asunto y si existe algún plazo próximo.</p>
+                
+                <div class="contact-methods">
+                    <a href="{{ whatsapp_link('Hola, quisiera realizar una consulta con Lexflex.') }}" target="_blank" rel="noreferrer">
+                        <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20.5 11.7a8.5 8.5 0 0 1-12.6 7.4L3 20.5l1.4-4.7a8.5 8.5 0 1 1 16.1-4.1Z"/>
+                            <path d="M8.2 8.1c.4-1 1.1-.8 1.5-.1l.7 1.6c.2.5-.1.8-.5 1.2.8 1.7 2 2.8 3.7 3.5.4-.4.7-.9 1.2-.7l1.7.8c.6.3.7 1 .2 1.5-1.1 1.2-2.7 1.1-4.5.3-2.4-1-4.8-3.3-5.6-5.6-.4-1-.3-1.9.2-2.5"/>
+                        </svg>
+                        <span>
+                            <small>WhatsApp principal</small>
+                            <strong>{{ contact.whatsapp_display }}</strong>
+                        </span>
+                    </a>
+                    <a href="tel:{{ contact.secondary_phone.replace(' ', '') }}">
+                        {% include 'components/icons/phone.html' %}
+                        <span>
+                            <small>Teléfono alternativo</small>
+                            <strong>{{ contact.secondary_phone }}</strong>
+                        </span>
+                    </a>
+                    <a href="mailto:{{ contact.email }}">
+                        {% include 'components/icons/mail.html' %}
+                        <span>
+                            <small>Correo electrónico</small>
+                            <strong>{{ contact.email }}</strong>
+                        </span>
+                    </a>
+                </div>
+                
+                <div class="office-card">
+                    <div>
+                        <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/>
+                            <circle cx="12" cy="10" r="2.5"/>
+                        </svg>
+                        <span>
+                            <small>OFICINA</small>
+                            <strong>{{ contact.address }}</strong>
+                            <p>{{ contact.district }}</p>
+                        </span>
+                    </div>
+                    <div>
+                        {% include 'components/icons/clock.html' %}
+                        <span>
+                            <small>ATENCIÓN</small>
+                            <strong>Previa coordinación</strong>
+                            <p>Consultas presenciales y virtuales</p>
+                        </span>
+                    </div>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Jr.+Parra+del+Riego+338+El+Tambo+Huancayo" target="_blank" rel="noreferrer">
+                        Ver ubicación {% include 'components/icons/arrow.html' %}
+                    </a>
+                </div>
+            </div>
+            
+            <div class="reveal" style="transition-delay: 100ms;">
+                <div class="contact-form-card">
+                    <h3>Mensaje directo</h3>
+                    <p>Complete el formulario y nos comunicaremos con usted a la brevedad.</p>
+                    <form action="{{ whatsapp_link('') }}" method="get" target="_blank">
+                        <div class="form-group">
+                            <label for="name">Nombre completo</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Correo electrónico</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Teléfono</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Describa brevemente su situación</label>
+                            <textarea id="message" name="text" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="button gold">
+                            Enviar consulta {% include 'components/icons/arrow.html' %}
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="contact-map-section">
+        <div class="contact-map-graphic">
+            <span class="map-road road-one"></span>
+            <span class="map-road road-two"></span>
+            <span class="map-road road-three"></span>
+            <div class="large-map-pin">
+                <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/>
+                    <circle cx="12" cy="10" r="2.5"/>
+                </svg>
+                <div>
+                    <strong>Lexflex</strong>
+                    <span>El Tambo · Huancayo</span>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

@@ -1,0 +1,48 @@
+<footer class="site-footer">
+    <div class="footer-glow"></div>
+    <div class="container footer-grid">
+        <div class="footer-brand">
+            <a href="/" class="brand" aria-label="Lexflex, ir al inicio">
+                <img src="/static/media/lexflex-logo.svg" alt="Lexflex Estudio Jurídico">
+            </a>
+            <p>Estrategia jurídica rigurosa, atención directa y soluciones construidas para cada asunto.</p>
+            <span>Huancayo · Atención presencial y virtual</span>
+        </div>
+        
+        <div>
+            <h3>Explora</h3>
+            <a href="/nosotros">El estudio</a>
+            <a href="/equipo">Profesionales</a>
+            <a href="/cursos">Lexflex Formación</a>
+            <a href="/blog">Análisis jurídico</a>
+        </div>
+        
+        <div>
+            <h3>Áreas principales</h3>
+            {% for service in services[:5] %}
+            <a href="/servicios/{{ service.slug }}">{{ service.short_title }}</a>
+            {% endfor %}
+        </div>
+        
+        <div class="footer-contact">
+            <h3>Contacto directo</h3>
+            <a href="tel:+{{ contact.whatsapp }}">
+                {% include 'components/icons/phone.html' %}
+                {{ contact.whatsapp_display }}
+            </a>
+            <a href="mailto:{{ contact.email }}">
+                {% include 'components/icons/mail.html' %}
+                {{ contact.email }}
+            </a>
+            <p>
+                {% include 'components/icons/pin.html' %}
+                <span>{{ contact.address }}<br>{{ contact.district }}</span>
+            </p>
+        </div>
+    </div>
+    
+    <div class="container footer-bottom">
+        <span>© 2026 Lexflex. Todos los derechos reservados.</span>
+        <span>La información del sitio es orientativa y no sustituye asesoría legal para un caso concreto.</span>
+    </div>
+</footer>

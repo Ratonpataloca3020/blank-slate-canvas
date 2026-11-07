@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if title %}{{ title }}{% else %}Lexflex | Estudio Jurídico{% endif %}</title>
+    <meta name="description" content="{% if description %}{{ description }}{% else %}Estudio jurídico en Huancayo especializado en derecho administrativo, contrataciones del Estado y más.{% endif %}">
+    
+    <!-- SEO Meta Tags -->
+    <meta property="og:title" content="{% if title %}{{ title }}{% else %}Lexflex | Estudio Jurídico{% endif %}">
+    <meta property="og:description" content="{% if description %}{{ description }}{% else %}Estudio jurídico en Huancayo{% endif %}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ site_url }}{{ request.url.path }}">
+    <meta property="og:image" content="{{ site_url }}/static/media/lexflex-logo-master.png">
+    
+    <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+    
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="/static/css/styles.css">
+    
+    <style>
+        /* Reveal animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.7s cubic-bezier(0.2, 0.75, 0.25, 1), 
+                        transform 0.7s cubic-bezier(0.2, 0.75, 0.25, 1);
+        }
+        .reveal.is-visible {
+            opacity: 1;
+            transform: none;
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-to-content">Saltar al contenido principal</a>
+    {% include 'components/header.html' %}
+    
+    <main id="main-content">
+        {% block content %}{% endblock %}
+    </main>
+    
+    {% include 'components/footer.html' %}
+    {% include 'components/whatsapp-float.html' %}
+    {% include 'components/chat-widget.html' %}
+    
+    <!-- Scripts -->
+    <script src="/static/js/reveal.js"></script>
+    <script src="/static/js/header.js"></script>
+    <script src="/static/js/navigation.js"></script>
+    <script src="/static/js/chat.js"></script>
+</body>
+</html>

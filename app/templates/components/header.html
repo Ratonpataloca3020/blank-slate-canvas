@@ -1,0 +1,38 @@
+<header class="site-header" id="site-header">
+    <div class="header-inner">
+        <a href="/" class="brand" aria-label="Lexflex, ir al inicio">
+            <img src="/static/media/lexflex-logo.svg" alt="Lexflex Estudio Jurídico">
+        </a>
+        
+        <nav class="desktop-nav" aria-label="Navegación principal">
+            <a href="/" class="{% if request.url.path == '/' %}active{% endif %}">Inicio</a>
+            <a href="/nosotros" class="{% if '/nosotros' in request.url.path %}active{% endif %}">Nosotros</a>
+            <a href="/servicios" class="{% if '/servicios' in request.url.path %}active{% endif %}">Servicios</a>
+            <a href="/equipo" class="{% if '/equipo' in request.url.path %}active{% endif %}">Equipo</a>
+            <a href="/cursos" class="{% if '/cursos' in request.url.path %}active{% endif %}">Cursos</a>
+            <a href="/blog" class="{% if '/blog' in request.url.path %}active{% endif %}">Análisis</a>
+            <a href="/contacto" class="{% if '/contacto' in request.url.path %}active{% endif %}">Contacto</a>
+        </nav>
+        
+        <a class="header-cta" href="{{ whatsapp_link('Hola, quisiera solicitar una evaluación inicial de mi caso.') }}" target="_blank" rel="noreferrer">
+            {% include 'components/icons/whatsapp.html' %}
+            Solicitar orientación
+        </a>
+        
+        <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false" id="menu-toggle">
+            <span class="menu-icon">{% include 'components/icons/menu.html' %}</span>
+            <span class="close-icon" style="display: none;">{% include 'components/icons/close.html' %}</span>
+        </button>
+    </div>
+    
+    <div class="mobile-panel" id="mobile-panel">
+        <a href="/">Inicio{% include 'components/icons/arrow.html' %}</a>
+        <a href="/nosotros">Nosotros{% include 'components/icons/arrow.html' %}</a>
+        <a href="/servicios">Servicios{% include 'components/icons/arrow.html' %}</a>
+        <a href="/equipo">Equipo{% include 'components/icons/arrow.html' %}</a>
+        <a href="/cursos">Cursos{% include 'components/icons/arrow.html' %}</a>
+        <a href="/blog">Análisis{% include 'components/icons/arrow.html' %}</a>
+        <a href="/contacto">Contacto{% include 'components/icons/arrow.html' %}</a>
+        <a href="{{ whatsapp_link('Hola, quisiera solicitar una evaluación inicial de mi caso.') }}" target="_blank" rel="noreferrer">Escribir por WhatsApp</a>
+    </div>
+</header>
