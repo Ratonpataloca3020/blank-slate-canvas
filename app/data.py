@@ -247,6 +247,32 @@ professionals: list[Professional] = [
         ],
         bio="Especialista en derecho civil, gestión pública y cumplimiento. Brinda asesoría y defensa en asuntos complejos, con especial atención a la integridad, la evidencia y la protección de los intereses del cliente."
     ),
+    Professional(
+        slug="maria-fernanda-silva-torres",
+        name="María Fernanda Silva Torres",
+        role="Abogada senior",
+        registry="Colegiatura N.° 5842",
+        image="/static/media/diego-cordova-professional.png",
+        focus=[
+            "Derecho Laboral",
+            "Derecho Civil",
+            "Compliance"
+        ],
+        bio="Especialista en derecho laboral y civil con amplia experiencia en asesoría empresarial. Su enfoque integra prevención de riesgos, negociación y defensa estratégica en controversias complejas."
+    ),
+    Professional(
+        slug="carlos-eduardo-mendoza-rios",
+        name="Carlos Eduardo Mendoza Ríos",
+        role="Abogado consultor",
+        registry="Colegiatura N.° 6321",
+        image="/static/media/luis-cordova-professional.png",
+        focus=[
+            "Derecho Tributario",
+            "Derecho Administrativo",
+            "Gestión Pública"
+        ],
+        bio="Especialista en derecho tributario y administrativo. Brinda asesoría integral en procedimientos fiscales, recursos administrativos y estrategias de cumplimiento tributario para empresas y personas."
+    ),
 ]
 
 
