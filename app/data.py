@@ -252,7 +252,7 @@ professionals: list[Professional] = [
         name="María Fernanda Silva Torres",
         role="Abogada senior",
         registry="Colegiatura N.° 5842",
-        image="/static/media/diego-cordova-professional.png",
+        image="/static/media/maria-silva-professional.png",
         focus=[
             "Derecho Laboral",
             "Derecho Civil",
@@ -265,7 +265,7 @@ professionals: list[Professional] = [
         name="Carlos Eduardo Mendoza Ríos",
         role="Abogado consultor",
         registry="Colegiatura N.° 6321",
-        image="/static/media/luis-cordova-professional.png",
+        image="/static/media/carlos-mendoza-professional.png",
         focus=[
             "Derecho Tributario",
             "Derecho Administrativo",
