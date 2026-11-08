@@ -1,5 +1,8 @@
 <!-- Chat Widget - Elegant Design -->
 <div class="chat-widget-container">
+    <!-- Backdrop Overlay -->
+    <div class="chat-backdrop" id="chat-backdrop"></div>
+    
     <!-- Chat Button -->
     <button class="chat-trigger" id="chat-trigger" aria-label="Abrir chat - Cuéntanos tu caso">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -34,8 +37,10 @@
             <div class="chat-message bot-message">
                 <div class="message-avatar">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="12" cy="7" r="4"></circle>
+                        <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+                        <circle cx="8" cy="15" r="1" fill="currentColor"></circle>
+                        <circle cx="16" cy="15" r="1" fill="currentColor"></circle>
+                        <path d="M9 11V7a3 3 0 0 1 6 0v4"></path>
                     </svg>
                 </div>
                 <div class="message-content">
@@ -86,38 +91,60 @@
     z-index: 999;
 }
 
+/* Backdrop Overlay */
+.chat-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 998;
+    backdrop-filter: blur(4px);
+}
+
+.chat-backdrop.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
 /* Chat Trigger Button */
 .chat-trigger {
     display: flex;
     align-items: center;
     gap: 0.75rem;
     padding: 1rem 1.5rem;
-    background: linear-gradient(135deg, var(--gold-champagne), var(--gold-dark));
-    color: var(--midnight);
-    border: none;
+    background: linear-gradient(135deg, #d4af37, #b8941f);
+    color: #0a0a0a;
+    border: 2px solid #d4af37;
     border-radius: 50px;
     font-size: 0.875rem;
     font-weight: 700;
     cursor: pointer;
-    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.5),
+                0 0 0 4px rgba(10, 10, 10, 0.8);
     transition: all 0.3s ease;
 }
 
 .chat-trigger span {
-    color: #000;
+    color: #0a0a0a;
     font-weight: 700;
 }
 
 .chat-trigger:hover {
     transform: translateY(-2px);
-    box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
+    box-shadow: 0 15px 40px rgba(212, 175, 55, 0.6),
+                0 0 0 4px rgba(10, 10, 10, 0.8);
 }
 
 .chat-trigger svg {
     width: 20px;
     height: 20px;
-    color: #000;
-    stroke: #000;
+    color: #0a0a0a;
+    stroke: #0a0a0a;
 }
 
 .chat-trigger.hidden {
@@ -128,17 +155,18 @@
 
 /* Chat Panel */
 .chat-panel {
-    position: absolute;
-    bottom: 0;
-    right: 0;
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
     width: 420px;
     max-width: calc(100vw - 2rem);
     height: 600px;
     max-height: calc(100vh - 8rem);
-    background: var(--linen);
-    border: 1px solid var(--border-dark);
-    border-radius: 12px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+    background: white;
+    border: 2px solid var(--gold-champagne);
+    border-radius: 16px;
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(212, 175, 55, 0.3);
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -146,6 +174,7 @@
     pointer-events: none;
     transform: translateY(20px) scale(0.95);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
 }
 
 .chat-panel.active {
@@ -161,9 +190,9 @@
     align-items: flex-start;
     gap: 1rem;
     padding: 2rem;
-    background: var(--midnight);
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
     color: var(--ivory);
-    border-bottom: 1px solid var(--border-dark);
+    border-bottom: 2px solid var(--gold-champagne);
 }
 
 .chat-header-content {
@@ -192,21 +221,22 @@
 
 .status-text {
     font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.7);
+    color: #ffffff;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    opacity: 0.9;
 }
 
 .chat-header h3 {
     font-size: 1.5rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
-    color: var(--gold-champagne);
+    color: #d4af37;
 }
 
 .chat-header p {
     font-size: 0.875rem;
-    color: rgba(255, 255, 255, 0.8);
+    color: #ffffff;
     line-height: 1.5;
     font-weight: 400;
 }
@@ -218,16 +248,16 @@
     display: grid;
     place-items: center;
     background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 8px;
-    color: rgba(255, 255, 255, 0.7);
+    color: #ffffff;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 .chat-close:hover {
-    background: rgba(255, 255, 255, 0.15);
-    color: var(--ivory);
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
     transform: rotate(90deg);
 }
 
@@ -236,7 +266,7 @@
     flex: 1;
     padding: 1.5rem;
     overflow-y: auto;
-    background: var(--pearl);
+    background: #f8f8f8;
 }
 
 .chat-message {
@@ -293,11 +323,12 @@
     margin: 0;
     font-size: 0.875rem;
     line-height: 1.6;
-    color: var(--charcoal);
+    color: #1a1a1a;
+    font-weight: 500;
 }
 
 .user-message .message-bubble p {
-    color: var(--ivory);
+    color: #ffffff;
 }
 
 .message-time {

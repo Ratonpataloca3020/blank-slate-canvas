@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     const trigger = document.getElementById('chat-trigger');
     const panel = document.getElementById('chat-panel');
+    const backdrop = document.getElementById('chat-backdrop');
     const closeBtn = document.getElementById('chat-close');
     const input = document.getElementById('chat-input');
     const sendBtn = document.getElementById('chat-send');
@@ -11,13 +12,31 @@ document.addEventListener('DOMContentLoaded', function() {
 
     console.log('Trigger:', trigger);
     console.log('Panel:', panel);
+    console.log('Backdrop:', backdrop);
 
     // Open chat
     if (trigger) {
         trigger.addEventListener('click', function() {
             console.log('Chat trigger clicked');
+            
+            // Hide trigger button
             trigger.classList.add('hidden');
+            
+            // Show backdrop
+            if (backdrop) {
+                backdrop.classList.add('active');
+                backdrop.style.display = 'block';
+                backdrop.style.opacity = '1';
+            }
+            
+            // Show panel with class and inline styles as fallback
             panel.classList.add('active');
+            panel.style.display = 'flex';
+            panel.style.opacity = '1';
+            panel.style.pointerEvents = 'all';
+            panel.style.transform = 'translateY(0) scale(1)';
+            panel.style.visibility = 'visible';
+            
             setTimeout(() => {
                 if (input) input.focus();
             }, 300);
@@ -26,13 +45,33 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Close chat
     if (closeBtn) {
-        closeBtn.addEventListener('click', function() {
-            console.log('Chat close clicked');
-            panel.classList.remove('active');
-            setTimeout(() => {
-                trigger.classList.remove('hidden');
-            }, 300);
-        });
+        closeBtn.addEventListener('click', closeChat);
+    }
+    
+    // Close chat when clicking backdrop
+    if (backdrop) {
+        backdrop.addEventListener('click', closeChat);
+    }
+    
+    function closeChat() {
+        console.log('Chat close clicked');
+        
+        // Hide backdrop
+        if (backdrop) {
+            backdrop.classList.remove('active');
+            backdrop.style.opacity = '0';
+        }
+        
+        // Hide panel
+        panel.classList.remove('active');
+        panel.style.opacity = '0';
+        panel.style.pointerEvents = 'none';
+        panel.style.transform = 'translateY(20px) scale(0.95)';
+        
+        setTimeout(() => {
+            trigger.classList.remove('hidden');
+            if (backdrop) backdrop.style.display = 'none';
+        }, 300);
     }
 
     // Auto-resize textarea
@@ -96,8 +135,10 @@ document.addEventListener('DOMContentLoaded', function() {
             botMessage.innerHTML = `
                 <div class="message-avatar">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="12" cy="7" r="4"></circle>
+                        <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+                        <circle cx="8" cy="15" r="1" fill="currentColor"></circle>
+                        <circle cx="16" cy="15" r="1" fill="currentColor"></circle>
+                        <path d="M9 11V7a3 3 0 0 1 6 0v4"></path>
                     </svg>
                 </div>
                 <div class="message-content">
