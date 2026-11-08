@@ -5,10 +5,9 @@ Para usar en PythonAnywhere
 import sys
 import os
 
-# Ruta del proyecto
-project_home = '/home/Diegocor423/lexflex'
-if project_home not in sys.path:
-    sys.path.insert(0, project_home)
+# Agregar virtualenv al path PRIMERO
+sys.path.insert(0, '/home/Diegocor423/lexflex/venv/lib/python3.10/site-packages')
+sys.path.insert(0, '/home/Diegocor423/lexflex')
 
 # Importar la aplicación Flask
 from app.main_flask import app as application
