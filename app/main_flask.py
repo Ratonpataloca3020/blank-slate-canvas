@@ -3,6 +3,7 @@ Lexflex - Estudio Jurídico
 Versión Flask (WSGI) para PythonAnywhere
 """
 import sys
+import os
 from pathlib import Path
 
 # Agregar el directorio raíz al path
@@ -18,11 +19,15 @@ from app.data import (
 )
 
 
-# Crear aplicación Flask
+# Crear aplicación Flask con rutas ABSOLUTAS
+app_dir = Path(__file__).parent
+templates_dir = app_dir / 'templates'
+static_dir = app_dir.parent / 'static'
+
 app = Flask(
     __name__,
-    template_folder='templates',
-    static_folder='../static',
+    template_folder=str(templates_dir),
+    static_folder=str(static_dir),
     static_url_path='/static'
 )
 
