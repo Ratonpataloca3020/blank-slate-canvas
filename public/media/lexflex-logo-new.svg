@@ -1,0 +1,152 @@
+<svg width="800" height="240" viewBox="0 0 800 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Gradiente Plata Cromada -->
+    <linearGradient id="silverChrome" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:1" />
+      <stop offset="35%" style="stop-color:#E8E8E8;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#C0C0C0;stop-opacity:1" />
+      <stop offset="65%" style="stop-color:#D4D4D4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F0F0F0;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Gradiente Rojo Cromado -->
+    <linearGradient id="redChrome" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF4444;stop-opacity:1" />
+      <stop offset="35%" style="stop-color:#E30613;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#C00510;stop-opacity:1" />
+      <stop offset="65%" style="stop-color:#E30613;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF2020;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Gradiente Curva Roja -->
+    <linearGradient id="curveRed" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#E30613;stop-opacity:0.3" />
+      <stop offset="50%" style="stop-color:#E30613;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF4444;stop-opacity:0.4" />
+    </linearGradient>
+    
+    <!-- Sombra texto -->
+    <filter id="textShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="2" dy="2" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.5"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Brillo metálico -->
+    <filter id="metalShine">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+      <feSpecularLighting result="specOut" specularExponent="20" lighting-color="#ffffff">
+        <fePointLight x="50" y="30" z="200"/>
+      </feSpecularLighting>
+      <feComposite in="SpecOut" in2="SourceAlpha" operator="in" result="specOut"/>
+      <feComposite in="SourceGraphic" in2="specOut" operator="arithmetic" k1="0" k2="1" k3="1" k4="0"/>
+    </filter>
+  </defs>
+  
+  <!-- Fondo sutil -->
+  <rect width="800" height="240" fill="#0a0a0a"/>
+  
+  <!-- Elementos decorativos rojos -->
+  <path d="M 680 0 L 800 0 L 800 120 Z" fill="url(#curveRed)" opacity="0.15"/>
+  <path d="M 650 0 L 800 0 L 800 80 Z" fill="#E30613" opacity="0.08"/>
+  
+  <!-- LETRA L (Plata) -->
+  <path d="M 80 60 L 110 60 L 110 155 L 180 155 L 180 180 L 80 180 Z" 
+        fill="url(#silverChrome)" 
+        filter="url(#metalShine)"
+        stroke="#FFFFFF" 
+        stroke-width="1" 
+        opacity="0.95"/>
+  
+  <!-- LETRA F (Roja) -->
+  <path d="M 220 60 L 320 60 L 320 85 L 250 85 L 250 110 L 310 110 L 310 135 L 250 135 L 250 180 L 220 180 Z" 
+        fill="url(#redChrome)" 
+        filter="url(#metalShine)"
+        stroke="#FF4444" 
+        stroke-width="1"/>
+  
+  <!-- CURVA DECORATIVA (Roja brillante) -->
+  <path d="M 160 100 Q 200 80, 260 120 Q 280 135, 300 140" 
+        stroke="url(#curveRed)" 
+        stroke-width="8" 
+        fill="none" 
+        stroke-linecap="round"
+        opacity="0.85"/>
+  
+  <path d="M 160 100 Q 200 80, 260 120 Q 280 135, 300 140" 
+        stroke="#FFFFFF" 
+        stroke-width="2" 
+        fill="none" 
+        stroke-linecap="round"
+        opacity="0.3"/>
+  
+  <!-- BALANZA DE JUSTICIA (Plata cromada) -->
+  <g transform="translate(340, 80)">
+    <!-- Base -->
+    <ellipse cx="0" cy="75" rx="12" ry="3" fill="url(#silverChrome)" opacity="0.7"/>
+    
+    <!-- Columna central -->
+    <rect x="-2" y="20" width="4" height="55" fill="url(#silverChrome)" filter="url(#metalShine)"/>
+    
+    <!-- Barra horizontal -->
+    <rect x="-45" y="18" width="90" height="4" fill="url(#silverChrome)" rx="2" filter="url(#metalShine)"/>
+    
+    <!-- Plato izquierdo -->
+    <g transform="translate(-35, 22)">
+      <line x1="0" y1="0" x2="0" y2="15" stroke="url(#silverChrome)" stroke-width="1.5"/>
+      <ellipse cx="0" cy="18" rx="12" ry="3" fill="none" stroke="url(#silverChrome)" stroke-width="1.5"/>
+      <path d="M -12 18 L -10 28 L 10 28 L 12 18" fill="none" stroke="url(#silverChrome)" stroke-width="1.5"/>
+    </g>
+    
+    <!-- Plato derecho -->
+    <g transform="translate(35, 22)">
+      <line x1="0" y1="0" x2="0" y2="15" stroke="url(#silverChrome)" stroke-width="1.5"/>
+      <ellipse cx="0" cy="18" rx="12" ry="3" fill="none" stroke="url(#silverChrome)" stroke-width="1.5"/>
+      <path d="M -12 18 L -10 28 L 10 28 L 12 18" fill="none" stroke="url(#silverChrome)" stroke-width="1.5"/>
+    </g>
+    
+    <!-- Círculos decorativos rojos -->
+    <circle cx="-35" cy="15" r="3" fill="#E30613" opacity="0.8"/>
+    <circle cx="35" cy="15" r="3" fill="#E30613" opacity="0.8"/>
+  </g>
+  
+  <!-- TEXTO: LEXFLEX (Plata) -->
+  <text x="80" y="220" 
+        font-family="'Arial Black', 'Helvetica', sans-serif" 
+        font-size="52" 
+        font-weight="900" 
+        fill="url(#silverChrome)" 
+        filter="url(#textShadow)"
+        letter-spacing="2">LEXFLEX</text>
+  
+  <!-- TEXTO: PERU (Rojo) -->
+  <text x="408" y="220" 
+        font-family="'Arial Black', 'Helvetica', sans-serif" 
+        font-size="52" 
+        font-weight="900" 
+        fill="url(#redChrome)" 
+        filter="url(#textShadow)"
+        letter-spacing="2">PERU</text>
+  
+  <!-- TAGLINE -->
+  <text x="400" y="235" 
+        text-anchor="middle"
+        font-family="'Arial', 'Helvetica', sans-serif" 
+        font-size="12" 
+        font-weight="400" 
+        fill="#C0C0C0" 
+        letter-spacing="3">SOLUCIONES LEGALES, A TU MEDIDA</text>
+  
+  <!-- Línea decorativa roja debajo del tagline -->
+  <line x1="280" y1="238" x2="330" y2="238" stroke="#E30613" stroke-width="2" opacity="0.8"/>
+  <line x1="470" y1="238" x2="520" y2="238" stroke="#E30613" stroke-width="2" opacity="0.8"/>
+  
+  <!-- Línea central roja (énfasis) -->
+  <rect x="338" y="236" width="124" height="2" fill="#E30613" rx="1"/>
+</svg>

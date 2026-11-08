@@ -1,6 +1,109 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 210" role="img" aria-labelledby="title desc">
-  <title id="title">Lexflex Estudio Jurídico</title><desc id="desc">Monograma LF dorado y nombre Lexflex</desc>
-  <defs><linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f4d58a"/><stop offset=".45" stop-color="#c89235"/><stop offset=".72" stop-color="#f1cc76"/><stop offset="1" stop-color="#9a641f"/></linearGradient></defs>
-  <g fill="url(#gold)"><path d="M37 35h23v121h53v19H37z"/><path d="M73 51h13v111H73zM91 56h12v106H91z" opacity=".92"/><path d="M104 56h67v18h-45v29h39v18h-39v54h-22z"/><path d="M65 28h50l-8 8H73zM65 183h50l-8-8H73z" opacity=".82"/><rect x="66" y="42" width="45" height="5" rx="2.5" opacity=".75"/><rect x="66" y="164" width="45" height="5" rx="2.5" opacity=".75"/></g>
-  <g fill="url(#gold)"><text x="207" y="119" font-family="Georgia, 'Times New Roman', serif" font-size="74" letter-spacing="3">LEXFLEX</text><text x="211" y="161" font-family="Arial, Helvetica, sans-serif" font-size="20" letter-spacing="11">ESTUDIO JURÍDICO</text></g>
+<svg width="280" height="70" viewBox="0 0 280 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Gradiente Plata Cromada -->
+    <linearGradient id="silver" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#C0C0C0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E8E8E8;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Gradiente Rojo Cromado -->
+    <linearGradient id="red" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF4444;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#E30613;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF2020;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Brillo metálico -->
+    <filter id="shine">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="1"/>
+      <feSpecularLighting result="spec" specularExponent="25" lighting-color="#ffffff">
+        <fePointLight x="20" y="10" z="100"/>
+      </feSpecularLighting>
+      <feComposite in="SourceGraphic" in2="spec" operator="arithmetic" k1="0" k2="1" k3="1" k4="0"/>
+    </filter>
+  </defs>
+  
+  <!-- L (Plata) -->
+  <path d="M 10 14 L 17 14 L 17 54 L 34 54 L 34 61 L 10 61 Z" 
+        fill="url(#silver)" 
+        filter="url(#shine)"/>
+  
+  <!-- F (Rojo) -->
+  <path d="M 42 14 L 66 14 L 66 21 L 49 21 L 49 34 L 63 34 L 63 41 L 49 41 L 49 61 L 42 61 Z" 
+        fill="url(#red)" 
+        filter="url(#shine)"/>
+  
+  <!-- Curva decorativa roja -->
+  <path d="M 32 34 Q 40 28, 50 38" 
+        stroke="url(#red)" 
+        stroke-width="3.5" 
+        fill="none" 
+        stroke-linecap="round"
+        opacity="0.85"/>
+  
+  <!-- Línea de brillo en curva -->
+  <path d="M 32 34 Q 40 28, 50 38" 
+        stroke="#FFFFFF" 
+        stroke-width="1" 
+        fill="none" 
+        stroke-linecap="round"
+        opacity="0.4"/>
+  
+  <!-- Balanza de justicia (mini) -->
+  <g transform="translate(74, 24) scale(0.65)">
+    <!-- Base -->
+    <ellipse cx="0" cy="42" rx="7" ry="2" fill="url(#silver)" opacity="0.6"/>
+    
+    <!-- Columna -->
+    <rect x="-1.2" y="12" width="2.4" height="30" fill="url(#silver)" filter="url(#shine)"/>
+    
+    <!-- Barra horizontal -->
+    <rect x="-18" y="10.5" width="36" height="3" fill="url(#silver)" rx="1.5" filter="url(#shine)"/>
+    
+    <!-- Plato izquierdo -->
+    <g transform="translate(-14, 13.5)">
+      <line x1="0" y1="0" x2="0" y2="10" stroke="url(#silver)" stroke-width="1.2"/>
+      <ellipse cx="0" cy="12" rx="7" ry="1.8" fill="none" stroke="url(#silver)" stroke-width="1.2"/>
+      <path d="M -7 12 L -6 18 L 6 18 L 7 12" fill="none" stroke="url(#silver)" stroke-width="1.2"/>
+    </g>
+    
+    <!-- Plato derecho -->
+    <g transform="translate(14, 13.5)">
+      <line x1="0" y1="0" x2="0" y2="10" stroke="url(#silver)" stroke-width="1.2"/>
+      <ellipse cx="0" cy="12" rx="7" ry="1.8" fill="none" stroke="url(#silver)" stroke-width="1.2"/>
+      <path d="M -7 12 L -6 18 L 6 18 L 7 12" fill="none" stroke="url(#silver)" stroke-width="1.2"/>
+    </g>
+    
+    <!-- Detalles rojos -->
+    <circle cx="-14" cy="9" r="2" fill="#E30613" opacity="0.85"/>
+    <circle cx="14" cy="9" r="2" fill="#E30613" opacity="0.85"/>
+  </g>
+  
+  <!-- LEXFLEX (Plata cromada) -->
+  <text x="10" y="68" 
+        font-family="'Arial Black', 'Helvetica', sans-serif" 
+        font-size="16" 
+        font-weight="900" 
+        fill="url(#silver)" 
+        letter-spacing="1.2">LEXFLEX</text>
+  
+  <!-- PERU (Rojo cromado) -->
+  <text x="118" y="68" 
+        font-family="'Arial Black', 'Helvetica', sans-serif" 
+        font-size="16" 
+        font-weight="900" 
+        fill="url(#red)" 
+        letter-spacing="1.2">PERU</text>
+  
+  <!-- Línea decorativa roja -->
+  <rect x="189" y="63" width="2" height="6" fill="#E30613" rx="1" opacity="0.6"/>
+  
+  <!-- Tagline pequeño -->
+  <text x="198" y="68" 
+        font-family="'Arial', 'Helvetica', sans-serif" 
+        font-size="6.5" 
+        font-weight="400" 
+        fill="#999" 
+        letter-spacing="1.8">SOLUCIONES LEGALES</text>
 </svg>

@@ -1,20 +1,23 @@
 @import "tailwindcss";
 
 :root {
-  /* Elegant International Law Firm Color Palette */
+  /* Lexflex Logo Color Palette - Red, Silver & Black */
   --navy-950:#0a0a0a; --navy-900:#1a1a1a; --navy-850:#2d2d2d; --navy-800:#424242;
   --ink:#1a1a1a; --ivory:#f8f6f0; --paper:#fafaf8;
   
-  /* Gold Elegant Scheme (replacing red) */
-  --gold-300:#e6c866; --gold-400:#d4af37; --gold-500:#b8941f; --gold-600:#9a7b1a;
-  --gold-700:#7d6415; --gold-800:#604d10;
+  /* Red Crimson Scheme (from logo) */
+  --red-300:#ff6b6b; --red-400:#DC143C; --red-500:#b8112f; --red-600:#990e27;
+  --red-700:#7a0b1f; --red-800:#5c0817;
   
-  /* Aliases */
-  --red-300:var(--gold-300); --red-400:var(--gold-400); --red-500:var(--gold-500); 
-  --red-600:var(--gold-600); --red-700:var(--gold-700); --red-800:var(--gold-800);
+  /* Silver/Chrome tones */
+  --silver-300:#f5f5f5; --silver-400:#e8e8e8; --silver-500:#c0c0c0;
+  
+  /* Aliases for gold (now red) */
+  --gold-300:var(--red-300); --gold-400:var(--red-400); --gold-500:var(--red-500); 
+  --gold-600:var(--red-600); --gold-700:var(--red-700); --gold-800:var(--red-800);
   
   --muted:#6b6b6b;
-  --line:rgba(212,175,55,.25); --line-soft:rgba(212,175,55,.08);
+  --line:rgba(220,20,60,.25); --line-soft:rgba(220,20,60,.08);
   /* Elegant Typography - Single Font Family */
   --serif:"Inter","Geist",Arial,sans-serif; 
   --font-geist-sans:"Inter","Geist";
@@ -46,7 +49,7 @@ h1,h2,h3,p{margin-top:0} h1, h2, h3, h4, h5, h6 {
 .site-header{position:fixed;z-index:100;top:0;left:0;width:100%;border-bottom:1px solid rgba(255,255,255,.09);background:linear-gradient(rgba(2,9,15,.9),rgba(2,9,15,.28));transition:.25s}
 .site-header.is-scrolled{background:rgba(3,12,20,.95);box-shadow:0 10px 35px rgba(0,0,0,.2);backdrop-filter:blur(18px)}
 .header-inner{display:flex;width:min(1320px,calc(100% - 42px));height:84px;align-items:center;margin:auto}
-.brand{display:flex;width:214px;height:65px;align-items:center;flex:none}.brand img{width:100%;height:100%;object-fit:contain}
+.brand{display:flex;width:auto;max-width:300px;height:70px;align-items:center;flex:none;padding-right:10px}.brand img{height:100%;width:auto;object-fit:contain}
 .desktop-nav{display:flex;align-items:center;gap:23px;margin-left:auto}.desktop-nav a{position:relative;padding:31px 0 28px;color:rgba(255,255,255,.78);font-size:11px;font-weight:600}
 .desktop-nav a:after{position:absolute;bottom:19px;left:0;width:0;height:1px;background:var(--gold-300);content:"";transition:.2s}.desktop-nav a:hover,.desktop-nav a.active{color:#fff}.desktop-nav a:hover:after,.desktop-nav a.active:after{width:100%}
 .header-cta{display:flex;min-height:42px;align-items:center;gap:8px;border:1px solid rgba(219,174,88,.66);margin-left:28px;padding:0 14px;color:var(--gold-300);font-size:10px;font-weight:750}.header-cta:hover{background:var(--gold-400);color:var(--navy-950)}

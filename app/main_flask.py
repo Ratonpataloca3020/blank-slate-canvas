@@ -2,8 +2,14 @@
 Lexflex - Estudio Jurídico
 Versión Flask (WSGI) para PythonAnywhere
 """
-from flask import Flask, render_template, request, redirect, url_for, abort
+import sys
 from pathlib import Path
+
+# Agregar el directorio raíz al path
+root_dir = Path(__file__).parent.parent
+sys.path.insert(0, str(root_dir))
+
+from flask import Flask, render_template, request, redirect, url_for, abort
 
 from app.config import settings
 from app.data import (
@@ -142,13 +148,59 @@ app.register_blueprint(chat_flask.bp, url_prefix='/api')
 @app.errorhandler(404)
 def page_not_found(e):
     """Página 404."""
-    return render_template('pages/404.html', title="Página no encontrada"), 404
+    return f"""
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Página no encontrada | Lexflex</title>
+        <style>
+            body {{ font-family: 'Inter', Arial, sans-serif; background: #0a0a0a; color: white; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; }}
+            .error-content {{ text-align: center; }}
+            h1 {{ font-size: 72px; margin: 0; color: #DC143C; }}
+            p {{ font-size: 18px; color: #999; }}
+            a {{ color: #DC143C; text-decoration: none; }}
+        </style>
+    </head>
+    <body>
+        <div class="error-content">
+            <h1>404</h1>
+            <p>Página no encontrada</p>
+            <a href="/">← Volver al inicio</a>
+        </div>
+    </body>
+    </html>
+    """, 404
 
 
 @app.errorhandler(500)
 def internal_error(e):
     """Error 500."""
-    return render_template('pages/500.html', title="Error del servidor"), 500
+    return f"""
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Error del servidor | Lexflex</title>
+        <style>
+            body {{ font-family: 'Inter', Arial, sans-serif; background: #0a0a0a; color: white; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; }}
+            .error-content {{ text-align: center; }}
+            h1 {{ font-size: 72px; margin: 0; color: #DC143C; }}
+            p {{ font-size: 18px; color: #999; }}
+            a {{ color: #DC143C; text-decoration: none; }}
+        </style>
+    </head>
+    <body>
+        <div class="error-content">
+            <h1>500</h1>
+            <p>Error del servidor</p>
+            <a href="/">← Volver al inicio</a>
+        </div>
+    </body>
+    </html>
+    """, 500
 
 
 if __name__ == '__main__':
