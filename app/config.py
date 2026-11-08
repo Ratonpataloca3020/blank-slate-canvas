@@ -1,26 +1,24 @@
-from pydantic_settings import BaseSettings, SettingsConfigDict
+import os
+from dotenv import load_dotenv
+
+# Cargar variables de entorno
+load_dotenv()
 
 
-class Settings(BaseSettings):
+class Settings:
     """Application settings."""
     
-    app_name: str = "Lexflex"
-    app_env: str = "development"
-    debug: bool = True
+    app_name = "Lexflex"
+    app_env = os.getenv("APP_ENV", "production")
+    debug = os.getenv("DEBUG", "False").lower() == "true"
     
-    host: str = "0.0.0.0"
-    port: int = 8080
+    host = os.getenv("HOST", "0.0.0.0")
+    port = int(os.getenv("PORT", 8080))
     
-    site_url: str = "http://localhost:8080"
+    site_url = os.getenv("SITE_URL", "https://www.lexflexperu.com")
     
-    openai_api_key: str = ""
-    openai_model: str = "gpt-4"
-    
-    model_config = SettingsConfigDict(
-        env_file=".env",
-        env_file_encoding="utf-8",
-        case_sensitive=False
-    )
+    openai_api_key = os.getenv("OPENAI_API_KEY", "")
+    openai_model = os.getenv("OPENAI_MODEL", "gpt-4")
 
 
 settings = Settings()
