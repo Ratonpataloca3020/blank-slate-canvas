@@ -1,0 +1,7 @@
+# Lexflex - Flask/WSGI version para PythonAnywhere
+Flask==3.0.0
+Jinja2==3.1.4
+python-dotenv==1.0.1
+pydantic==2.9.2
+pydantic-settings==2.5.2
+gunicorn==21.2.0
