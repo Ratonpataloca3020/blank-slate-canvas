@@ -1,20 +1,23 @@
 @import "tailwindcss";
 
 :root {
-  --navy-950:#030c14; --navy-900:#06131f; --navy-850:#091a28; --navy-800:#0c2233;
-  --ink:#11202a; --ivory:#f4f0e7; --paper:#fbfaf6;
+  /* Elegant International Law Firm Color Palette */
+  --navy-950:#0a0a0a; --navy-900:#1a1a1a; --navy-850:#2d2d2d; --navy-800:#424242;
+  --ink:#1a1a1a; --ivory:#f8f6f0; --paper:#fafaf8;
   
-  /* Red Color Scheme (replacing gold) */
-  --red-300:#ff6b6b; --red-400:#ee5a52; --red-500:#dc2626; --red-600:#b91c1c;
-  --red-700:#991b1b; --red-800:#7f1d1d;
+  /* Gold Elegant Scheme (replacing red) */
+  --gold-300:#e6c866; --gold-400:#d4af37; --gold-500:#b8941f; --gold-600:#9a7b1a;
+  --gold-700:#7d6415; --gold-800:#604d10;
   
-  /* Aliases for easy replacement */
-  --gold-300:var(--red-300); --gold-400:var(--red-400); --gold-500:var(--red-500); 
-  --gold-600:var(--red-600); --gold-700:var(--red-700); --gold-800:var(--red-800);
+  /* Aliases */
+  --red-300:var(--gold-300); --red-400:var(--gold-400); --red-500:var(--gold-500); 
+  --red-600:var(--gold-600); --red-700:var(--gold-700); --red-800:var(--gold-800);
   
-  --muted:#6e7478;
-  --line:rgba(220,38,38,.34); --line-soft:rgba(17,32,42,.12);
-  --serif:Georgia,"Times New Roman",serif; --font-geist-sans:"Geist";--sans:var(--font-geist-sans),"Geist",Arial,sans-serif;
+  --muted:#6b6b6b;
+  --line:rgba(212,175,55,.25); --line-soft:rgba(212,175,55,.08);
+  --serif:"Playfair Display","Cormorant Garamond",Georgia,"Times New Roman",serif; 
+  --font-geist-sans:"Inter","Geist";
+  --sans:var(--font-geist-sans),"Inter","Geist",Arial,sans-serif;
 }
 *{box-sizing:border-box} html{scroll-behavior:smooth;background:var(--navy-950)}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);overflow-x:hidden}
