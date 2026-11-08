@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
+<!-- Contact Page Specific Styles -->
+<link rel="stylesheet" href="/static/css/contact-page.css">
+
 <main>
     <!-- Page Hero -->
     <section class="page-hero">
@@ -19,86 +22,108 @@
     <!-- Contact Info Section -->
     <section class="section contact-page-section">
         <div class="container contact-page-grid">
+            <!-- Left Column: Contact Info -->
             <div class="reveal contact-info-column">
                 <p class="eyebrow">Atención Lexflex</p>
-                <h2>Presencial en Huancayo. Coordinación virtual en todo el Perú.</h2>
+                <h2>Presencial en Huancayo.<br>Coordinación virtual<br>en todo el Perú.</h2>
                 <p>Puede escribirnos por WhatsApp, llamar o enviar un correo. Para una primera coordinación, indique el tipo de asunto y si existe algún plazo próximo.</p>
                 
                 <div class="contact-methods">
-                    <a href="{{ whatsapp_link('Hola, quisiera realizar una consulta con Lexflex.') }}" target="_blank" rel="noreferrer">
-                        <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M20.5 11.7a8.5 8.5 0 0 1-12.6 7.4L3 20.5l1.4-4.7a8.5 8.5 0 1 1 16.1-4.1Z"/>
-                            <path d="M8.2 8.1c.4-1 1.1-.8 1.5-.1l.7 1.6c.2.5-.1.8-.5 1.2.8 1.7 2 2.8 3.7 3.5.4-.4.7-.9 1.2-.7l1.7.8c.6.3.7 1 .2 1.5-1.1 1.2-2.7 1.1-4.5.3-2.4-1-4.8-3.3-5.6-5.6-.4-1-.3-1.9.2-2.5"/>
-                        </svg>
-                        <span>
+                    <a href="{{ whatsapp_link('Hola, quisiera realizar una consulta con Lexflex.') }}" target="_blank" rel="noreferrer" class="contact-method-item">
+                        <div class="contact-method-icon">
+                            <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20.5 11.7a8.5 8.5 0 0 1-12.6 7.4L3 20.5l1.4-4.7a8.5 8.5 0 1 1 16.1-4.1Z"/>
+                                <path d="M8.2 8.1c.4-1 1.1-.8 1.5-.1l.7 1.6c.2.5-.1.8-.5 1.2.8 1.7 2 2.8 3.7 3.5.4-.4.7-.9 1.2-.7l1.7.8c.6.3.7 1 .2 1.5-1.1 1.2-2.7 1.1-4.5.3-2.4-1-4.8-3.3-5.6-5.6-.4-1-.3-1.9.2-2.5"/>
+                            </svg>
+                        </div>
+                        <div class="contact-method-text">
                             <small>WhatsApp principal</small>
                             <strong>{{ contact.whatsapp_display }}</strong>
-                        </span>
+                        </div>
                     </a>
-                    <a href="tel:{{ contact.secondary_phone.replace(' ', '') }}">
-                        {% include 'components/icons/phone.html' %}
-                        <span>
+                    
+                    <a href="tel:{{ contact.secondary_phone.replace(' ', '') }}" class="contact-method-item">
+                        <div class="contact-method-icon">
+                            {% include 'components/icons/phone.html' %}
+                        </div>
+                        <div class="contact-method-text">
                             <small>Teléfono alternativo</small>
                             <strong>{{ contact.secondary_phone }}</strong>
-                        </span>
+                        </div>
                     </a>
-                    <a href="mailto:{{ contact.email }}">
-                        {% include 'components/icons/mail.html' %}
-                        <span>
+                    
+                    <a href="mailto:{{ contact.email }}" class="contact-method-item">
+                        <div class="contact-method-icon">
+                            {% include 'components/icons/mail.html' %}
+                        </div>
+                        <div class="contact-method-text">
                             <small>Correo electrónico</small>
                             <strong>{{ contact.email }}</strong>
-                        </span>
+                        </div>
                     </a>
                 </div>
                 
                 <div class="office-card">
-                    <div>
+                    <div class="office-card-item">
                         <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/>
                             <circle cx="12" cy="10" r="2.5"/>
                         </svg>
-                        <span>
+                        <div>
                             <small>OFICINA</small>
                             <strong>{{ contact.address }}</strong>
                             <p>{{ contact.district }}</p>
-                        </span>
+                        </div>
                     </div>
-                    <div>
+                    <div class="office-card-item">
                         {% include 'components/icons/clock.html' %}
-                        <span>
+                        <div>
                             <small>ATENCIÓN</small>
                             <strong>Previa coordinación</strong>
                             <p>Consultas presenciales y virtuales</p>
-                        </span>
+                        </div>
                     </div>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Jr.+Parra+del+Riego+338+El+Tambo+Huancayo" target="_blank" rel="noreferrer">
+                    <a href="https://www.google.com/maps/search/?api=1&query=Jr.+Parra+del+Riego+338+El+Tambo+Huancayo" target="_blank" rel="noreferrer" class="office-card-link">
                         Ver ubicación {% include 'components/icons/arrow.html' %}
                     </a>
                 </div>
             </div>
             
-            <div class="reveal" style="transition-delay: 100ms;">
+            <!-- Right Column: Contact Form -->
+            <div class="reveal contact-form-column" style="transition-delay: 100ms;">
                 <div class="contact-form-card">
                     <h3>Mensaje directo</h3>
-                    <p>Complete el formulario y nos comunicaremos con usted a la brevedad.</p>
-                    <form action="{{ whatsapp_link('') }}" method="get" target="_blank">
-                        <div class="form-group">
-                            <label for="name">Nombre completo</label>
-                            <input type="text" id="name" name="name" required>
+                    <p class="form-description">Complete el formulario y nos comunicaremos con usted a la brevedad.</p>
+                    <form action="{{ whatsapp_link('') }}" method="get" target="_blank" class="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Nombre completo</label>
+                                <input type="text" id="name" name="name" placeholder="Ej: Juan Pérez García" required>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="email">Correo electrónico</label>
-                            <input type="email" id="email" name="email" required>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Correo electrónico</label>
+                                <input type="email" id="email" name="email" placeholder="correo@ejemplo.com" required>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="phone">Teléfono</label>
-                            <input type="tel" id="phone" name="phone" required>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Teléfono</label>
+                                <input type="tel" id="phone" name="phone" placeholder="999 999 999" required>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="message">Describa brevemente su situación</label>
-                            <textarea id="message" name="text" rows="5" required></textarea>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="message">Describa brevemente su situación</label>
+                                <textarea id="message" name="text" rows="5" placeholder="Describa su caso legal brevemente..." required></textarea>
+                            </div>
                         </div>
-                        <button type="submit" class="button gold">
+                        
+                        <button type="submit" class="button gold form-submit-btn">
                             Enviar consulta {% include 'components/icons/arrow.html' %}
                         </button>
                     </form>
