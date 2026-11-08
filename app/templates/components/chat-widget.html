@@ -198,8 +198,9 @@
 
 .chat-header p {
     font-size: 0.875rem;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 0.8);
     line-height: 1.5;
+    font-weight: 400;
 }
 
 .chat-close {
@@ -284,6 +285,11 @@
     margin: 0;
     font-size: 0.875rem;
     line-height: 1.6;
+    color: var(--charcoal);
+}
+
+.user-message .message-bubble p {
+    color: var(--ivory);
 }
 
 .message-time {
@@ -326,12 +332,13 @@
     font-family: var(--sans);
     font-size: 0.875rem;
     line-height: 1.5;
+    color: var(--charcoal);
     resize: none;
     outline: none;
 }
 
 .chat-input::placeholder {
-    color: var(--muted-text);
+    color: #999;
 }
 
 .chat-send {
