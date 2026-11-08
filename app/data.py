@@ -131,28 +131,6 @@ services: list[Service] = [
         icon="civil"
     ),
     Service(
-        slug="gestion-publica",
-        eyebrow="Decisiones con sustento",
-        title="Gestión Pública",
-        short_title="Gestión Pública",
-        summary="Consultoría jurídica para fortalecer decisiones, procesos internos y cumplimiento dentro de organizaciones públicas.",
-        description="Apoyamos la adopción de decisiones públicas con criterios de legalidad, trazabilidad y prevención de riesgos, conectando el análisis jurídico con la realidad operativa de cada institución.",
-        matters=[
-            "Informes y opiniones legales",
-            "Revisión de procedimientos internos",
-            "Gestión de riesgos públicos",
-            "Responsabilidad funcional",
-            "Mejora de documentos y directivas",
-            "Asistencia técnica a equipos de gestión"
-        ],
-        approach=[
-            "Comprensión del proceso institucional",
-            "Identificación de brechas y responsabilidades",
-            "Recomendaciones claras y aplicables"
-        ],
-        icon="public"
-    ),
-    Service(
         slug="compliance",
         eyebrow="Prevención y cultura de integridad",
         title="Compliance y Cumplimiento",
@@ -173,50 +151,6 @@ services: list[Service] = [
             "Implementación, capacitación y mejora continua"
         ],
         icon="compliance"
-    ),
-    Service(
-        slug="defensa-corrupcion-funcionarios",
-        eyebrow="Defensa especializada",
-        title="Defensa en casos de corrupción de funcionarios",
-        short_title="Defensa anticorrupción",
-        summary="Defensa técnica en investigaciones y procesos vinculados con presuntos delitos contra la administración pública.",
-        description="Abordamos cada caso con reserva, revisión rigurosa de los hechos y una estrategia de defensa que integra el expediente, la prueba y el contexto de la función pública.",
-        matters=[
-            "Evaluación inicial y teoría del caso",
-            "Investigaciones preliminares y preparatorias",
-            "Revisión de actos funcionales y expedientes",
-            "Estrategia probatoria y documental",
-            "Acompañamiento en diligencias",
-            "Defensa durante el proceso"
-        ],
-        approach=[
-            "Confidencialidad desde el primer contacto",
-            "Reconstrucción documentada de los hechos",
-            "Defensa técnica y comunicación permanente"
-        ],
-        icon="defense"
-    ),
-    Service(
-        slug="splaft",
-        eyebrow="Prevención LA/FT",
-        title="SPLAFT — Prevención de lavado de activos y financiamiento del terrorismo",
-        short_title="SPLAFT",
-        summary="Diseño, implementación y fortalecimiento de sistemas de prevención de lavado de activos y financiamiento del terrorismo, con experiencia ante la UIF.",
-        description="Acompañamos a sujetos obligados en la construcción de un SPLAFT funcional y verificable: desde el diagnóstico de riesgos y el manual de prevención hasta el reporte ante la UIF-Perú y la atención de requerimientos y supervisiones.",
-        matters=[
-            "Implementación del SPLAFT",
-            "Manual y código de conducta LA/FT",
-            "Designación y soporte al Oficial de Cumplimiento",
-            "Debida diligencia del cliente y matriz de riesgos",
-            "Registro de operaciones y ROS ante la UIF",
-            "Atención de requerimientos y supervisiones"
-        ],
-        approach=[
-            "Diagnóstico del nivel de riesgo y de las obligaciones aplicables",
-            "Diseño de manual, controles y procedimientos operativos",
-            "Capacitación, reportes y acompañamiento ante la UIF"
-        ],
-        icon="splaft"
     ),
 ]
 
