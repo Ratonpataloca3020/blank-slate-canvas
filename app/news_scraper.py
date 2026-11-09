@@ -5,8 +5,6 @@ HTML parsing con BeautifulSoup (sin JavaScript requerido)
 """
 import logging
 from datetime import datetime
-from bs4 import BeautifulSoup
-import re
 
 logger = logging.getLogger(__name__)
 
@@ -24,6 +22,15 @@ try:
 except ImportError:
     REQUESTS_AVAILABLE = False
     logger.warning("requests no disponible")
+
+# Import BeautifulSoup (optional - fall back to demo data if not available)
+try:
+    from bs4 import BeautifulSoup
+    import re
+    BS4_AVAILABLE = True
+except ImportError:
+    BS4_AVAILABLE = False
+    logger.warning("BeautifulSoup no disponible - usando demo data únicamente")
 
 # Demo news data - Fallback si el scraping falla
 DEMO_NEWS = [
@@ -199,11 +206,6 @@ def fetch_news():
     Fuentes:
     1. LP Derecho (lpderecho.pe) - Noticias jurídicas especializadas ⭐
     2. Demo data - Fallback si scraping falla
-    
-    Futuras opciones:
-    - Poder Judicial RSS feed
-    - Google News API
-    - ANDINA news agency
     """
     if _is_cache_valid() and _news_cache['articles']:
         logger.info("Devolviendo noticias del cache")
