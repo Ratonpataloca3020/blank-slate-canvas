@@ -1,11 +1,10 @@
 """
-News Scraper para El Peruano - Sección Derecho
-Trae noticias dinámicamente de https://elperuano.pe/derecho
-Usa Selenium para cargar JavaScript
-Fallback: Demo data + Ready for API integration
+News Scraper para Noticias Jurídicas de Perú
+Fuentes: LP Derecho (lpderecho.pe) + fallback a demo data
+HTML parsing con BeautifulSoup (sin JavaScript requerido)
 """
 import logging
-from datetime import datetime, timedelta
+from datetime import datetime
 from bs4 import BeautifulSoup
 import re
 
@@ -18,62 +17,57 @@ _news_cache = {
     'cache_duration': 3600  # 1 hora en segundos
 }
 
-# Importar Selenium (opcional, solo si está disponible)
+# Import requests (required for scraping)
 try:
-    from selenium import webdriver
-    from selenium.webdriver.common.by import By
-    from selenium.webdriver.support.ui import WebDriverWait
-    from selenium.webdriver.support import expected_conditions as EC
-    from selenium.webdriver.chrome.options import Options
-    SELENIUM_AVAILABLE = True
+    import requests
+    REQUESTS_AVAILABLE = True
 except ImportError:
-    SELENIUM_AVAILABLE = False
-    logger.warning("Selenium no disponible, usando método alternativo")
+    REQUESTS_AVAILABLE = False
+    logger.warning("requests no disponible")
 
-# Demo news data - realistic legal news for Peru
-# This is a temporary solution while we integrate with El Peruano's API
+# Demo news data - Fallback si el scraping falla
 DEMO_NEWS = [
     {
-        'title': 'Nueva normativa sobre compliance anticorrupción en el sector privado',
-        'link': 'https://elperuano.pe/derecho',
-        'description': 'El Ministerio de Justicia publica nuevas directrices para la implementación de programas de compliance anticorrupción en empresas del sector privado, estableciendo estándares mínimos de cumplimiento.',
+        'title': 'Dictan prisión preventiva a abogado sindicado de realizar tocamientos indebidos',
+        'link': 'https://lpderecho.pe/dictan-prision-preventiva/',
+        'description': 'El Poder Judicial dictó siete meses de prisión preventiva contra abogado investigado por delito de tocamientos indebidos.',
         'date': 'Hoy',
-        'source': 'El Peruano'
+        'source': 'LP Derecho'
     },
     {
-        'title': 'Modificaciones a la Ley de Gestión Pública para mejorar transparencia',
-        'link': 'https://elperuano.pe/derecho',
-        'description': 'Se publica el Decreto Supremo que modifica la Ley de Gestión Pública, fortaleciendo los mecanismos de transparencia y acceso a la información pública en entidades del Estado.',
+        'title': 'DL 1743 modifica la regulación de la legítima defensa',
+        'link': 'https://lpderecho.pe/dl-1743-legitima-defensa/',
+        'description': 'Se presume que quien ejerce la legítima defensa ha actuado de modo racional frente a la agresión ilegítima.',
+        'date': 'Hoy',
+        'source': 'LP Derecho'
+    },
+    {
+        'title': 'Condenan a mujer que se hizo pasar por posesionaria de terreno',
+        'link': 'https://lpderecho.pe/condenan-mujer-terreno/',
+        'description': 'Condenada mujer que engañó a compradora tras pago de S/9000 mostrando documento falso de posesión.',
+        'date': 'Hoy',
+        'source': 'LP Derecho'
+    },
+    {
+        'title': 'Reglamento TUO de la Ley de Jornada de Trabajo actualizado 2026',
+        'link': 'https://lpderecho.pe/reglamento-jornada/',
+        'description': 'Reglamento del TUO de la Ley de Jornada de Trabajo, Horario y Trabajo en Sobretiempo actualizado.',
+        'date': 'Hoy',
+        'source': 'LP Derecho'
+    },
+    {
+        'title': 'La unión de hecho en el derecho civil [ACTUALIZADO 2026]',
+        'link': 'https://lpderecho.pe/union-hecho-civil/',
+        'description': 'Análisis actualizado sobre la regulación de la unión de hecho en el Código Civil Peruano.',
+        'date': 'Hoy',
+        'source': 'LP Derecho'
+    },
+    {
+        'title': 'Juez protege a gestante cuyo exenamorado la presionaba para abortar',
+        'link': 'https://lpderecho.pe/proteccion-gestante/',
+        'description': 'Juez de Familia de Arequipa dictó medidas de protección a favor de gestante presionada para interrumpir embarazo.',
         'date': 'Ayer',
-        'source': 'El Peruano'
-    },
-    {
-        'title': 'Jurisprudencia: Corte Suprema aclara derechos laborales en home office',
-        'link': 'https://elperuano.pe/derecho',
-        'description': 'La Corte Suprema de Justicia emite sentencia sobre derechos y obligaciones de trabajadores en modalidad de trabajo remoto, estableciendo criterios para condiciones laborales justas.',
-        'date': '2 días atrás',
-        'source': 'El Peruano'
-    },
-    {
-        'title': 'Reforma tributaria: Nuevas disposiciones sobre deducciones empresariales',
-        'link': 'https://elperuano.pe/derecho',
-        'description': 'La SUNAT publica resoluciones aclaratorias sobre deducciones tributarias permitidas para empresas, especificando requisitos de documentación y sustento.',
-        'date': '3 días atrás',
-        'source': 'El Peruano'
-    },
-    {
-        'title': 'Regulación de protección de datos personales: AEPD anuncia nuevas guías',
-        'link': 'https://elperuano.pe/derecho',
-        'description': 'La Autoridad de Protección de Datos Personales publica guías prácticas para la implementación de medidas de protección de datos en organizaciones públicas y privadas.',
-        'date': '4 días atrás',
-        'source': 'El Peruano'
-    },
-    {
-        'title': 'Contrataciones públicas: Nuevos procedimientos simplificados para MYPE',
-        'link': 'https://elperuano.pe/derecho',
-        'description': 'OSCE establece procedimientos simplificados para facilitar la participación de microempresas y pequeñas empresas en procesos de contratación pública.',
-        'date': '5 días atrás',
-        'source': 'El Peruano'
+        'source': 'LP Derecho'
     }
 ]
 
@@ -86,180 +80,140 @@ def _is_cache_valid():
     return age < _news_cache['cache_duration']
 
 
-def _fetch_with_selenium():
-    """Traer noticias usando Selenium (para JavaScript)."""
-    if not SELENIUM_AVAILABLE:
+def _fetch_from_lpderecho():
+    """
+    Traer noticias de LP Derecho (lpderecho.pe)
+    Fuente: https://lpderecho.pe/
+    Esta es la principal fuente de noticias jurídicas de Perú
+    """
+    if not REQUESTS_AVAILABLE:
+        logger.error("requests no disponible")
         return []
     
     try:
-        logger.info("Usando Selenium para cargar noticias...")
+        logger.info("Scrapeando noticias de LP Derecho...")
         
-        chrome_options = Options()
-        chrome_options.add_argument('--headless')
-        chrome_options.add_argument('--no-sandbox')
-        chrome_options.add_argument('--disable-dev-shm-usage')
-        chrome_options.add_argument('--disable-gpu')
-        
-        driver = webdriver.Chrome(options=chrome_options)
-        driver.set_page_load_timeout(20)
-        
-        driver.get("https://elperuano.pe/derecho")
-        
-        # Esperar a que carguen las noticias
-        WebDriverWait(driver, 10).until(
-            EC.presence_of_all_elements_located((By.CSS_SELECTOR, "[class*='article'], [class*='news'], [class*='item']"))
-        )
-        
-        html = driver.page_source
-        driver.quit()
-        
-        soup = BeautifulSoup(html, 'html.parser')
-        articles = []
-        
-        # Buscar artículos con múltiples selectores
-        news_items = soup.find_all('div', class_=re.compile(r'(article|news|item|card|post)', re.I))
-        
-        for item in news_items[:12]:
-            try:
-                # Extraer título
-                title_elem = item.find(['h2', 'h3', 'h1'])
-                if not title_elem:
-                    title_elem = item.find('a', string=True)
-                if not title_elem:
-                    continue
-                    
-                title = title_elem.get_text(strip=True)
-                if not title or len(title) < 5:
-                    continue
-                
-                # Extraer link
-                link_elem = item.find('a', href=True)
-                link = link_elem['href'] if link_elem else "#"
-                if link.startswith('/'):
-                    link = "https://elperuano.pe" + link
-                elif not link.startswith('http'):
-                    link = "https://elperuano.pe/" + link
-                
-                # Extraer descripción
-                desc_elem = item.find('p')
-                description = desc_elem.get_text(strip=True)[:250] if desc_elem else ""
-                
-                # Extraer fecha
-                date_elem = item.find(['time', 'span'], class_=re.compile(r'(date|time|fecha)', re.I))
-                date_str = date_elem.get_text(strip=True) if date_elem else "Hoy"
-                
-                if title and link != "#":
-                    articles.append({
-                        'title': title[:150],
-                        'link': link,
-                        'description': description,
-                        'date': date_str,
-                        'source': 'El Peruano'
-                    })
-                
-                if len(articles) >= 10:
-                    break
-                    
-            except Exception as e:
-                logger.warning(f"Error extrayendo artículo: {e}")
-                continue
-        
-        return articles
-        
-    except Exception as e:
-        logger.error(f"Error con Selenium: {e}")
-        return []
-
-
-def _fetch_with_requests():
-    """Traer noticias usando requests (alternativa sin JavaScript)."""
-    try:
-        import requests
-        logger.info("Scrapeando noticias de El Peruano...")
-        
-        url = "https://elperuano.pe/derecho"
+        # URL para obtener noticias
+        url = "https://lpderecho.pe/?s=&post_type=post&category=noticias"
         headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
         }
         
-        response = requests.get(url, headers=headers, timeout=15)
+        response = requests.get(url, headers=headers, timeout=10)
         response.encoding = 'utf-8'
         response.raise_for_status()
         
         soup = BeautifulSoup(response.content, 'html.parser')
         articles = []
         
-        # Buscar artículos
-        news_items = soup.find_all('div', class_=re.compile(r'(article|news|item|card|post)', re.I))
+        # LP Derecho usa estructura HTML estándar para posts
+        # Buscar elementos de tipo post/article
+        post_items = soup.find_all('article')
         
-        for item in news_items[:12]:
+        if not post_items:
+            # Fallback: buscar divs con clase 'post'
+            post_items = soup.find_all(['div'], class_=re.compile(r'post|article|item', re.I))
+        
+        for item in post_items[:15]:
             try:
-                title_elem = item.find(['h2', 'h3', 'h1'])
+                # Extraer título
+                title_elem = item.find(['h2', 'h3', 'h1', 'a'], class_=re.compile(r'title|heading', re.I))
+                if not title_elem:
+                    # Intentar con enlace de post
+                    title_elem = item.find('a', string=True)
+                
                 if not title_elem:
                     continue
-                    
+                
                 title = title_elem.get_text(strip=True)
-                if not title or len(title) < 5:
+                if not title or len(title) < 10:
                     continue
                 
+                # Extraer enlace
                 link_elem = item.find('a', href=True)
-                link = link_elem['href'] if link_elem else "#"
-                if link.startswith('/'):
-                    link = "https://elperuano.pe" + link
-                elif not link.startswith('http'):
-                    link = "https://elperuano.pe/" + link
+                link = link_elem['href'] if link_elem else ""
                 
+                if not link or not link.startswith('http'):
+                    if link:
+                        link = "https://lpderecho.pe" + (link if link.startswith('/') else '/' + link)
+                    else:
+                        continue
+                
+                # Extraer descripción/resumen
+                description = ""
                 desc_elem = item.find('p')
-                description = desc_elem.get_text(strip=True)[:250] if desc_elem else ""
+                if desc_elem:
+                    description = desc_elem.get_text(strip=True)[:200]
                 
-                date_elem = item.find(['time', 'span'], class_=re.compile(r'(date|time)', re.I))
-                date_str = date_elem.get_text(strip=True) if date_elem else "Hoy"
+                # Extraer fecha
+                date_str = "Hoy"
+                date_elem = item.find(['time', 'span'], class_=re.compile(r'date|meta|published', re.I))
+                if date_elem:
+                    date_text = date_elem.get_text(strip=True)
+                    # Procesar fecha
+                    if 'noviembre' in date_text.lower() or 'november' in date_text.lower():
+                        date_str = 'Hoy'
+                    elif 'octubre' in date_text.lower() or 'october' in date_text.lower():
+                        date_str = 'Hace días'
+                    else:
+                        date_str = date_text[:30]
                 
-                if title and link != "#":
+                # Extraer categoría si está disponible
+                category = ""
+                cat_elem = item.find(['span', 'a'], class_=re.compile(r'category|cat', re.I))
+                if cat_elem:
+                    category = cat_elem.get_text(strip=True)
+                
+                if title and link and len(title) > 10:
                     articles.append({
                         'title': title[:150],
                         'link': link,
                         'description': description,
                         'date': date_str,
-                        'source': 'El Peruano'
+                        'source': 'LP Derecho',
+                        'category': category
                     })
                 
                 if len(articles) >= 10:
                     break
                     
             except Exception as e:
-                logger.warning(f"Error: {e}")
+                logger.warning(f"Error extrayendo artículo de LP: {e}")
                 continue
         
+        if articles:
+            logger.info(f"Se obtuvieron {len(articles)} artículos de LP Derecho")
         return articles
         
     except Exception as e:
-        logger.error(f"Error con requests: {e}")
+        logger.error(f"Error scrapeando LP Derecho: {e}")
         return []
 
 
 def fetch_news():
     """
-    Traer noticias de El Peruano sección Derecho.
-    Intenta con Selenium primero, luego con requests, finalmente fallback a demo data.
+    Traer noticias de Perú del ámbito legal.
+    Intenta primero con LP Derecho, luego fallback a demo data.
     
-    NOTA: Actualmente retorna demo data. Una vez que El Peruano publique un API o RSS,
-    reemplaza _fetch_with_selenium/_fetch_with_requests para consumir esa fuente.
+    Fuentes:
+    1. LP Derecho (lpderecho.pe) - Noticias jurídicas especializadas ⭐
+    2. Demo data - Fallback si scraping falla
+    
+    Futuras opciones:
+    - Poder Judicial RSS feed
+    - Google News API
+    - ANDINA news agency
     """
     if _is_cache_valid() and _news_cache['articles']:
         logger.info("Devolviendo noticias del cache")
         return _news_cache['articles']
     
-    # Intentar con Selenium primero (mantiene infraestructura lista para futuro API)
-    articles = _fetch_with_selenium()
+    # Intentar con LP Derecho (HTML puro, sin JavaScript)
+    articles = _fetch_from_lpderecho()
     
-    # Si Selenium no funciona, usar requests
+    # Fallback a demo data si LP Derecho no funciona
     if not articles:
-        articles = _fetch_with_requests()
-    
-    # Fallback a demo data (mientras El Peruano no publique API)
-    if not articles:
-        logger.info("Usando demo news data (esperando API de El Peruano)")
+        logger.info("Usando demo news data (LP Derecho no disponible)")
         articles = DEMO_NEWS.copy()
     
     # Actualizar cache
