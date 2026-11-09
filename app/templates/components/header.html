@@ -10,6 +10,7 @@
             <a href="/servicios" class="{% if '/servicios' in request.url.path %}active{% endif %}">Servicios</a>
             <a href="/equipo" class="{% if '/equipo' in request.url.path %}active{% endif %}">Equipo</a>
             <a href="/cursos" class="{% if '/cursos' in request.url.path %}active{% endif %}">Cursos</a>
+            <a href="/noticias" class="{% if '/noticias' in request.url.path %}active{% endif %}">Noticias</a>
             <a href="/blog" class="{% if '/blog' in request.url.path %}active{% endif %}">Análisis</a>
             <a href="/contacto" class="{% if '/contacto' in request.url.path %}active{% endif %}">Contacto</a>
         </nav>
@@ -31,6 +32,7 @@
         <a href="/servicios">Servicios{% include 'components/icons/arrow.html' %}</a>
         <a href="/equipo">Equipo{% include 'components/icons/arrow.html' %}</a>
         <a href="/cursos">Cursos{% include 'components/icons/arrow.html' %}</a>
+        <a href="/noticias">Noticias{% include 'components/icons/arrow.html' %}</a>
         <a href="/blog">Análisis{% include 'components/icons/arrow.html' %}</a>
         <a href="/contacto">Contacto{% include 'components/icons/arrow.html' %}</a>
         <a href="{{ whatsapp_link('Hola, quisiera solicitar una evaluación inicial de mi caso.') }}" target="_blank" rel="noreferrer">Escribir por WhatsApp</a>
