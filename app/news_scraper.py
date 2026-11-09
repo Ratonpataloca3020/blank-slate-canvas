@@ -85,9 +85,10 @@ def _fetch_from_lpderecho():
     Traer noticias de LP Derecho (lpderecho.pe)
     Fuente: https://lpderecho.pe/
     Esta es la principal fuente de noticias jurídicas de Perú
+    
+    NOTA: Solo funciona si BeautifulSoup está disponible
     """
-    if not REQUESTS_AVAILABLE:
-        logger.error("requests no disponible")
+    if not BS4_AVAILABLE or not REQUESTS_AVAILABLE:
         return []
     
     try:
@@ -208,8 +209,13 @@ def fetch_news():
         logger.info("Devolviendo noticias del cache")
         return _news_cache['articles']
     
-    # Intentar con LP Derecho (HTML puro, sin JavaScript)
-    articles = _fetch_from_lpderecho()
+    articles = []
+    
+    # Intentar con LP Derecho solo si BeautifulSoup está disponible
+    if BS4_AVAILABLE and REQUESTS_AVAILABLE:
+        articles = _fetch_from_lpderecho()
+    else:
+        logger.warning("BeautifulSoup o requests no disponible - usando demo data")
     
     # Fallback a demo data si LP Derecho no funciona
     if not articles:
