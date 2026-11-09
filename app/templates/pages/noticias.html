@@ -1,0 +1,208 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main>
+    <!-- Hero Section -->
+    <section class="page-hero">
+        <div class="page-hero-inner">
+            <h1>Noticias de Derecho</h1>
+            <p>Mantente informado con las últimas noticias y actualizaciones del Diario Oficial El Peruano.</p>
+        </div>
+    </section>
+
+    <!-- Noticias Section -->
+    <section class="section noticias-section">
+        <div class="container">
+            <div class="reveal section-heading centered">
+                <p class="eyebrow">Actualidades Jurídicas</p>
+                <h2>Las últimas noticias de El Peruano</h2>
+                <p>Información actualizada sobre legislación, jurisprudencia y temas legales relevantes.</p>
+            </div>
+
+            {% if news %}
+                <div class="noticias-grid">
+                    {% for article in news %}
+                    <div class="reveal noticia-card" style="transition-delay: {{ loop.index0 * 80 }}ms;">
+                        <article>
+                            <div class="noticia-header">
+                                <span class="noticia-source">{{ article.source }}</span>
+                                <span class="noticia-date">{{ article.date }}</span>
+                            </div>
+                            <h3>{{ article.title }}</h3>
+                            {% if article.description %}
+                            <p>{{ article.description }}</p>
+                            {% endif %}
+                            <a href="{{ article.link }}" target="_blank" rel="noreferrer" class="text-link dark-link">
+                                Leer noticia completa {% include 'components/icons/arrow.html' %}
+                            </a>
+                        </article>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="noticias-footer">
+                    <p class="small-text">Noticias traídas dinámicamente de El Peruano. Última actualización: <span id="update-time">hace pocos minutos</span></p>
+                </div>
+            {% else %}
+                <div class="noticias-empty">
+                    <p>No hay noticias disponibles en este momento. Por favor, intenta más tarde.</p>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- Contact Band -->
+    <section class="contact-band">
+        <div class="container contact-band-grid">
+            <div class="reveal contact-band-copy">
+                <p class="eyebrow light">¿Necesitas asesoría legal?</p>
+                <h2>Nuestro equipo está disponible para ayudarte.</h2>
+                <p>Contáctanos para consultar sobre cualquier asunto legal que requiera atención especializada.</p>
+                
+                <div class="hero-actions">
+                    <a class="button gold" href="{{ whatsapp_link('Hola, quisiera solicitar una evaluación inicial con Lexflex.') }}" target="_blank" rel="noreferrer">
+                        Escribir por WhatsApp {% include 'components/icons/whatsapp.html' %}
+                    </a>
+                    <a class="button ghost" href="/contacto">Ver datos de contacto</a>
+                </div>
+            </div>
+            
+            <div class="reveal location-card" style="transition-delay: 100ms;">
+                <div class="location-map">
+                    <span class="map-road road-one"></span>
+                    <span class="map-road road-two"></span>
+                    <span class="map-road road-three"></span>
+                    <div class="map-pin">
+                        <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/>
+                            <circle cx="12" cy="10" r="2.5"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="location-copy">
+                    <span>OFICINA LEXFLEX</span>
+                    <strong>{{ contact.address }}</strong>
+                    <p>{{ contact.district }}</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Jr.+Parra+del+Riego+338+El+Tambo+Huancayo" target="_blank" rel="noreferrer">
+                        Abrir en Google Maps {% include 'components/icons/arrow.html' %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<style>
+.noticias-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+    gap: 32px;
+    margin-top: 48px;
+}
+
+.noticia-card {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 32px;
+    background: rgba(255, 255, 255, 0.02);
+    transition: all 0.3s ease;
+    min-height: 380px;
+    display: flex;
+    flex-direction: column;
+}
+
+.noticia-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: #E30613;
+    transform: translateY(-4px);
+}
+
+.noticia-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    font-size: 12px;
+}
+
+.noticia-source {
+    background: rgba(227, 6, 19, 0.15);
+    color: #E30613;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.noticia-date {
+    color: #888;
+    font-size: 12px;
+}
+
+.noticia-card h3 {
+    font-size: 18px;
+    line-height: 1.5;
+    margin: 0 0 16px 0;
+    color: #fff;
+    flex-grow: 1;
+}
+
+.noticia-card p {
+    color: #aaa;
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0 0 20px 0;
+    flex-grow: 1;
+}
+
+.noticia-card .text-link {
+    margin-top: auto;
+}
+
+.noticias-empty {
+    text-align: center;
+    padding: 64px 0;
+    color: #666;
+}
+
+.noticias-footer {
+    text-align: center;
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.small-text {
+    font-size: 12px;
+    color: #666;
+}
+
+@media (max-width: 768px) {
+    .noticias-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .noticia-card {
+        padding: 24px;
+        min-height: auto;
+    }
+
+    .noticia-card h3 {
+        font-size: 16px;
+    }
+}
+</style>
+
+<script>
+// Actualizar tiempo de última actualización
+function updateTime() {
+    const now = new Date();
+    const timeElement = document.getElementById('update-time');
+    if (timeElement) {
+        timeElement.textContent = 'hace pocos minutos';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', updateTime);
+</script>
+{% endblock %}

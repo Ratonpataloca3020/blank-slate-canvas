@@ -127,6 +127,25 @@ def blog():
     )
 
 
+@app.route('/noticias')
+def noticias():
+    """Página de noticias de El Peruano."""
+    from app.news_scraper import get_cached_news
+    
+    try:
+        news = get_cached_news()
+    except Exception as e:
+        print(f"Error fetching news: {e}")
+        news = []
+    
+    return render_template(
+        'pages/noticias.html',
+        title="Noticias | Lexflex",
+        description="Noticias actuales de derecho y legislación de El Peruano.",
+        news=news,
+    )
+
+
 @app.route('/contacto')
 def contacto_page():
     """Página de contacto."""
