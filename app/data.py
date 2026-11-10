@@ -163,7 +163,7 @@ professionals: list[Professional] = [
         role="Abogado asociado",
         registry="Colegiatura N.° 7268",
         image="/static/media/diego-cordova-professional.png",
-        focus=["Derecho Federal", "Derecho Administrativo", "Contrataciones del Estado"],
+        focus=["Derecho Penal", "Derecho Administrativo", "Contrataciones del Estado"],
         bio="Especialista en el análisis estratégico de asuntos vinculados con la administración pública y la contratación estatal. Su práctica combina precisión normativa, evaluación de riesgos y acompañamiento cercano al cliente."
     ),
     Professional(
