@@ -930,26 +930,28 @@ p {
   max-width: 480px;
 }
 
-.footer-credit {
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.footer-credit span {
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.35);
-}
-
-.footer-credit a {
-  color: rgba(255, 215, 0, 0.65);
-  text-decoration: none;
-  font-weight: 600;
-  transition: color 0.25s ease;
+.footer-developed {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
   cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  overflow: hidden;
 }
 
-.footer-credit a:hover {
-  color: rgba(255, 215, 0, 0.95);
+.footer-developed img {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.footer-developed:hover {
+  transform: scale(1.4);
 }
 
 /* ============================================
