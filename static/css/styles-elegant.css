@@ -913,83 +913,45 @@ p {
   color: rgba(255, 255, 255, 0.5);
 }
 
-.footer-left {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.footer-left span:first-child {
-  color: rgba(255, 255, 255, 0.4);
-  font-size: 0.75rem;
-}
-
-.footer-left span:last-child {
-  color: rgba(255, 255, 255, 0.3);
-  font-size: 0.7rem;
-  max-width: 500px;
-}
-
-.developed-credit {
+.developed-footer {
   display: flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: 0.5rem;
   white-space: nowrap;
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.05) 0%, rgba(255, 215, 0, 0.02) 100%);
-  padding: 0.75rem 1.2rem;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 215, 0, 0.12);
-  transition: all 0.3s ease;
 }
 
-.developed-credit:hover {
-  background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%);
-  border-color: rgba(255, 215, 0, 0.25);
-  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.08);
-}
-
-.developed-credit span:first-child {
-  font-size: 0.7rem;
+.developed-footer span {
+  font-size: 0.75rem;
   color: rgba(255, 255, 255, 0.35);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  font-weight: 500;
+  letter-spacing: 0.3px;
 }
 
-.developed-credit a {
+.developed-footer a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
-  background: rgba(255, 215, 0, 0.08);
-  border: 1.5px solid rgba(255, 215, 0, 0.2);
+  background: transparent;
+  border: 1px solid rgba(255, 215, 0, 0.15);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   flex-shrink: 0;
   overflow: hidden;
 }
 
-.developed-credit a img {
-  width: 29px;
-  height: 29px;
+.developed-footer a img {
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   object-fit: cover;
 }
 
-.developed-credit a:hover {
-  background: rgba(255, 215, 0, 0.15);
-  border-color: rgba(255, 215, 0, 0.35);
-  box-shadow: 0 0 12px rgba(255, 215, 0, 0.25);
-  transform: scale(1.12);
-}
-
-.developed-name {
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.6);
-  font-weight: 600;
-  letter-spacing: 0.2px;
+.developed-footer a:hover {
+  border-color: rgba(255, 215, 0, 0.3);
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.2);
+  transform: scale(1.08);
 }
 
 /* ============================================
