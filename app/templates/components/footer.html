@@ -25,7 +25,12 @@
         </div>
         
         <div class="footer-contact">
-            <h3>Contacto directo</h3>
+            <div class="contact-header">
+                <h3>Contacto directo</h3>
+                <a href="https://wa.me/51918163200" target="_blank" rel="noopener noreferrer" title="Desarrollado por Groupti" class="footer-developed-icon">
+                    <img src="/static/media/groupti-circular.png" alt="Groupti">
+                </a>
+            </div>
             <a href="tel:+{{ contact.whatsapp }}">
                 {% include 'components/icons/phone.html' %}
                 {{ contact.whatsapp_display }}
@@ -38,9 +43,6 @@
                 {% include 'components/icons/pin.html' %}
                 <span>{{ contact.address }}<br>{{ contact.district }}</span>
             </p>
-            <a href="https://wa.me/51918163200" target="_blank" rel="noopener noreferrer" title="Desarrollado por Groupti" class="footer-developed-icon">
-                <img src="/static/media/groupti-circular.png" alt="Groupti">
-            </a>
         </div>
     </div>
     
