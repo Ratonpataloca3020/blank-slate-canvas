@@ -907,11 +907,11 @@ p {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 26px;
-  height: 26px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   background: transparent;
-  border: 1.5px solid rgba(255, 215, 0, 0.2);
+  border: 1px solid rgba(255, 215, 0, 0.15);
   cursor: pointer;
   transition: all 0.3s ease;
   flex-shrink: 0;
@@ -919,16 +919,16 @@ p {
 }
 
 .developed-btn img {
-  width: 22px;
-  height: 22px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   object-fit: cover;
 }
 
 .developed-btn:hover {
-  border-color: rgba(255, 215, 0, 0.4);
-  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
-  transform: scale(1.1);
+  border-color: rgba(255, 215, 0, 0.3);
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.25);
+  transform: scale(1.15);
 }
 
 /* ============================================
