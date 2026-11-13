@@ -5,7 +5,7 @@ from urllib.parse import quote
 
 IconType = Literal[
     "administrative", "contracts", "civil", "public", 
-    "compliance", "defense", "splaft"
+    "compliance", "defense", "splaft", "penal"
 ]
 
 
@@ -131,26 +131,26 @@ services: list[Service] = [
         icon="civil"
     ),
     Service(
-        slug="compliance",
-        eyebrow="Prevención y cultura de integridad",
-        title="Compliance y Cumplimiento",
-        short_title="Compliance",
-        summary="Diseño y fortalecimiento de mecanismos de cumplimiento, integridad y prevención de riesgos legales.",
-        description="Convertimos las obligaciones de cumplimiento en procesos comprensibles y aplicables, adecuados al tamaño, actividad y nivel de exposición de cada organización.",
+        slug="derecho-penal",
+        eyebrow="Defensa especializada",
+        title="Derecho Penal",
+        short_title="Derecho Penal",
+        summary="Representación y defensa en asuntos penales, investigaciones y procedimientos ante autoridades de persecución.",
+        description="Brindamos asesoría y defensa especializada en materia penal, desde la fase investigativa hasta la ejecución de sentencias. Protegemos los derechos fundamentales y construimos estrategias de defensa fundamentadas en el procedimiento penal y la evidencia disponible.",
         matters=[
-            "Diagnóstico de riesgos legales",
-            "Políticas y códigos de conducta",
-            "Controles y matrices de cumplimiento",
-            "Canales y protocolos internos",
-            "Capacitación de equipos",
-            "Prevención de conflictos de interés"
+            "Investigación y flagrancia",
+            "Medidas cautelares y prisión preventiva",
+            "Procedimientos de investigación preparatoria",
+            "Etapa intermedia y acusación",
+            "Juicio oral y sentencia",
+            "Recursos de casación y revisión"
         ],
         approach=[
-            "Diagnóstico proporcional a la organización",
-            "Diseño de herramientas concretas",
-            "Implementación, capacitación y mejora continua"
+            "Análisis inmediato de la imputación y evidencia",
+            "Protección de derechos durante investigación",
+            "Defensa técnica sostenida en todo el procedimiento"
         ],
-        icon="compliance"
+        icon="penal"
     ),
 ]
 
