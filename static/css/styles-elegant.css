@@ -934,24 +934,21 @@ p {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
+  width: 20px;
+  height: 20px;
   cursor: pointer;
   transition: all 0.3s ease;
   flex-shrink: 0;
-  overflow: hidden;
 }
 
-.footer-developed img {
-  width: 13px;
-  height: 13px;
-  border-radius: 50%;
-  object-fit: cover;
+.footer-developed svg {
+  width: 100%;
+  height: 100%;
 }
 
 .footer-developed:hover {
-  transform: scale(1.4);
+  transform: scale(1.3);
+  filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.4));
 }
 
 /* ============================================
