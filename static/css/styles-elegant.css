@@ -906,52 +906,88 @@ p {
 .footer-bottom {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  gap: 3rem;
   padding-top: 2rem;
   border-top: 1px solid var(--divider);
-  font-size: 0.8125rem;
   color: rgba(255, 255, 255, 0.5);
 }
 
-.developed-footer {
+.footer-copyright {
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  white-space: nowrap;
+  flex-direction: column;
+  gap: 0.6rem;
+  flex: 1;
 }
 
-.developed-footer span {
+.footer-copyright span:first-child {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.2px;
+}
+
+.footer-copyright span:last-child {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.28);
+  line-height: 1.5;
+  max-width: 480px;
+}
+
+.footer-credit {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.credit-text {
   font-size: 0.75rem;
   color: rgba(255, 255, 255, 0.35);
   letter-spacing: 0.3px;
+  font-weight: 500;
 }
 
-.developed-footer a {
+.credit-logo {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 22px;
-  height: 22px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
-  background: transparent;
-  border: 1px solid rgba(255, 215, 0, 0.15);
+  background: rgba(255, 215, 0, 0.08);
+  border: 0.8px solid rgba(255, 215, 0, 0.12);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
   flex-shrink: 0;
   overflow: hidden;
+  padding: 1px;
 }
 
-.developed-footer a img {
-  width: 20px;
-  height: 20px;
+.credit-logo img {
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   object-fit: cover;
 }
 
-.developed-footer a:hover {
-  border-color: rgba(255, 215, 0, 0.3);
-  box-shadow: 0 0 8px rgba(255, 215, 0, 0.2);
-  transform: scale(1.08);
+.credit-logo:hover {
+  border-color: rgba(255, 215, 0, 0.25);
+  box-shadow: 0 0 6px rgba(255, 215, 0, 0.15);
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .footer-bottom {
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+
+  .footer-credit {
+    width: 100%;
+    justify-content: flex-start;
+  }
 }
 
 /* ============================================
