@@ -931,6 +931,9 @@ p {
 }
 
 .footer-credit {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   white-space: nowrap;
   flex-shrink: 0;
 }
@@ -942,14 +945,27 @@ p {
 }
 
 .footer-credit a {
-  color: rgba(255, 215, 0, 0.7);
-  text-decoration: none;
-  font-weight: 600;
-  transition: color 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.footer-credit a img {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .footer-credit a:hover {
-  color: rgba(255, 215, 0, 1);
+  transform: scale(1.2);
 }
 
 /* ============================================
