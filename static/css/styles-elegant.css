@@ -948,8 +948,8 @@ p {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   cursor: pointer;
   transition: all 0.25s ease;
@@ -958,14 +958,14 @@ p {
 }
 
 .footer-credit a img {
-  width: 11px;
-  height: 11px;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
   object-fit: cover;
 }
 
 .footer-credit a:hover {
-  transform: scale(1.25);
+  transform: scale(1.3);
 }
 
 /* ============================================
