@@ -874,10 +874,10 @@ p {
 }
 
 .footer-contact-wrapper {
-  display: grid;
-  grid-template-columns: 1fr auto;
+  display: flex;
+  flex-direction: row;
   grid-column: 4;
-  gap: 2rem;
+  gap: 1rem;
   align-items: flex-start;
 }
 
@@ -991,8 +991,10 @@ p {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 30px;
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  min-height: 24px;
   cursor: pointer;
   transition: all 0.3s ease;
   flex-shrink: 0;
@@ -1003,6 +1005,8 @@ p {
 .footer-developed-large img {
   width: 100%;
   height: 100%;
+  max-width: 24px;
+  max-height: 24px;
   border-radius: 50%;
   object-fit: cover;
 }
