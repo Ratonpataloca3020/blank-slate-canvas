@@ -822,7 +822,7 @@ p {
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
   gap: 4rem;
   margin-bottom: 4rem;
   align-items: start;
@@ -867,20 +867,23 @@ p {
 }
 
 .footer-contact {
-  grid-column: 4;
   color: rgba(255, 255, 255, 0.7);
   font-size: 9px;
   line-height: 1.65;
 }
 
+.footer-contact-wrapper {
+  display: flex;
+  flex-direction: column;
+  grid-column: 4;
+  gap: 1.5rem;
+}
+
 .footer-developed-section {
   display: flex;
   align-items: center;
-  justify-content: center;
-  grid-column: 5;
-  grid-row: 1;
-  justify-self: start;
-  align-self: start;
+  justify-content: flex-start;
+  flex-shrink: 0;
 }
 
 .footer-bottom {

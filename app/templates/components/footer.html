@@ -24,26 +24,28 @@
             {% endfor %}
         </div>
         
-        <div class="footer-contact">
-            <h3 class="footer-heading">Contacto directo</h3>
-            <a href="tel:+{{ contact.whatsapp }}">
-                {% include 'components/icons/phone.html' %}
-                {{ contact.whatsapp_display }}
-            </a>
-            <a href="mailto:{{ contact.email }}">
-                {% include 'components/icons/mail.html' %}
-                {{ contact.email }}
-            </a>
-            <p>
-                {% include 'components/icons/pin.html' %}
-                <span>{{ contact.address }}<br>{{ contact.district }}</span>
-            </p>
-        </div>
-        
-        <div class="footer-developed-section">
-            <a href="https://wa.me/51918163200" target="_blank" rel="noopener noreferrer" title="Desarrollado por Groupti" class="footer-developed-large">
-                <img src="/static/media/groupti-circular.png" alt="Groupti">
-            </a>
+        <div class="footer-contact-wrapper">
+            <div class="footer-contact">
+                <h3 class="footer-heading">Contacto directo</h3>
+                <a href="tel:+{{ contact.whatsapp }}">
+                    {% include 'components/icons/phone.html' %}
+                    {{ contact.whatsapp_display }}
+                </a>
+                <a href="mailto:{{ contact.email }}">
+                    {% include 'components/icons/mail.html' %}
+                    {{ contact.email }}
+                </a>
+                <p>
+                    {% include 'components/icons/pin.html' %}
+                    <span>{{ contact.address }}<br>{{ contact.district }}</span>
+                </p>
+            </div>
+            
+            <div class="footer-developed-section">
+                <a href="https://wa.me/51918163200" target="_blank" rel="noopener noreferrer" title="Desarrollado por Groupti" class="footer-developed-large">
+                    <img src="/static/media/groupti-circular.png" alt="Groupti">
+                </a>
+            </div>
         </div>
     </div>
     
