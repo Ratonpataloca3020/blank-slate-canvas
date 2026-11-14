@@ -9,23 +9,23 @@
             <span>Huancayo · Atención presencial y virtual</span>
         </div>
         
-        <div>
-            <h3>Explora</h3>
+        <div class="footer-links">
+            <h3 class="footer-heading">Explora</h3>
             <a href="/nosotros">El estudio</a>
             <a href="/equipo">Profesionales</a>
             <a href="/cursos">Lexflex Formación</a>
             <a href="/blog">Análisis jurídico</a>
         </div>
         
-        <div>
-            <h3>Áreas principales</h3>
+        <div class="footer-links">
+            <h3 class="footer-heading">Áreas principales</h3>
             {% for service in services[:5] %}
             <a href="/servicios/{{ service.slug }}">{{ service.short_title }}</a>
             {% endfor %}
         </div>
         
         <div class="footer-contact">
-            <h3>Contacto directo</h3>
+            <h3 class="footer-heading">Contacto directo</h3>
             <a href="tel:+{{ contact.whatsapp }}">
                 {% include 'components/icons/phone.html' %}
                 {{ contact.whatsapp_display }}
@@ -40,9 +40,11 @@
             </p>
         </div>
         
-        <a href="https://wa.me/51918163200" target="_blank" rel="noopener noreferrer" title="Desarrollado por Groupti" class="footer-developed-right">
-            <img src="/static/media/groupti-circular.png" alt="Groupti">
-        </a>
+        <div class="footer-developed-section">
+            <a href="https://wa.me/51918163200" target="_blank" rel="noopener noreferrer" title="Desarrollado por Groupti" class="footer-developed-large">
+                <img src="/static/media/groupti-circular.png" alt="Groupti">
+            </a>
+        </div>
     </div>
     
     <div class="container footer-bottom">
