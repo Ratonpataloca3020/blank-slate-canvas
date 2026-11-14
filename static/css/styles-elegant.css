@@ -870,13 +870,15 @@ p {
   color: rgba(255, 255, 255, 0.7);
   font-size: 9px;
   line-height: 1.65;
+  min-width: 140px;
 }
 
 .footer-contact-wrapper {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr auto;
   grid-column: 4;
-  gap: 1.5rem;
+  gap: 2rem;
+  align-items: flex-start;
 }
 
 .footer-developed-section {
@@ -989,8 +991,8 @@ p {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   cursor: pointer;
   transition: all 0.3s ease;
   flex-shrink: 0;
